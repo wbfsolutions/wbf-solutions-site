@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-page">
+
+<div class="auth-page">
+
+ <nav class="navbar">
+
+  <div class="logo">
+    <img src="Logo.png" alt="Logo" height="32">
+  </div>
+
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="store.html">Store</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <div class="auth-links">
+    <a href="login.html">Sign In</a>
+    <a href="signup.html" class="btn-small">Sign Up</a>
+  </div>
+
+</nav>
+
+  <h1>Create Account</h1>
+
+  <div class="auth-card">
+
+    <input id="name" type="text" placeholder="Full Name">
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <input id="confirmPassword" type="password" placeholder="Confirm Password">
+
+    <button onclick="signUp()" class="btn primary">Sign Up</button>
+
+    <p id="error" style="color:#ff6b6b; margin-top:10px;"></p>
+
+  </div>
+
+</div>
+
+<script type="module">
+import { auth, db } from "./firebase.js";
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { setDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+window.signUp = async function () {
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+  const errorBox = document.getElementById("error");
+
+  errorBox.textContent = "";
+
+  if (!name || !email || !password || !confirmPassword) {
+    errorBox.textContent = "Please fill in all fields.";
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    errorBox.textContent = "Passwords do not match.";
+    return;
+  }
+
+  if (password.length < 6) {
+    errorBox.textContent = "Password must be at least 6 characters.";
+    return;
+  }
+
+  try {
+    const userCred = await createUserWithEmailAndPassword(auth, email, password);
+
+    await setDoc(doc(db, "users", userCred.user.uid), {
+      name: name,
+      email: email,
+      createdAt: new Date()
+    });
+
+    alert("Account created successfully!");
+    window.location.href = "index.html";
+
+  } catch (err) {
+    errorBox.textContent = err.message;
+  }
+};
+
+</script>
+
+</body>
+</html>
