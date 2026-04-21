@@ -25,28 +25,170 @@
     <a href="contact.html">Contact</a>
   </div>
 
-  <div class="auth-links">
-    <a href="login.html">Sign In</a>
-    <a href="signup.html" class="btn-small">Sign Up</a>
+  <div class="auth-links" id="authLinks">
+
+    <!-- 🔥 USER NAME (hidden until logged in) -->
+    <span id="userName" style="display:none; margin-right:15px; color:#F8FAFC; font-size:14px;"></span>
+
+    <a href="login.html" id="loginLink">Sign In</a>
+    <a href="signup.html" id="signupLink" class="btn-small">Sign Up</a>
+
+    <a href="#" id="logoutLink" style="display:none;">Logout</a>
+
   </div>
+
+  <!-- 3 DOT MENU -->
+<div class="menu-toggle" onclick="toggleMenu()">
+  ⋮
+</div>
 
 </nav>
 <!-- HERO -->
 <section class="hero">
 
-  <div>
-    <h1>3D Design & Digital Assets</h1>
-    <p>High quality CAD models, textures, and production-ready assets.</p>
+  <!-- LEFT CONTENT -->
+  <div class="hero-text">
+    <h1>3D Models for Products, Parts & Manufacturing</h1>
+    <p><p>
+3D models for products, parts, and prototypes used in manufacturing, testing, and visualization. Deliverables are structured for practical use in production and development workflows.
+</p></p>
 
     <div class="hero-buttons">
-      <a href="portfolio.html" class="btn-primary">View Portfolio</a>
-      <a href="store.html" class="btn-secondary">Browse Store</a>
-    </div>
+  <a href="portfolio.html" class="btn primary">View Portfolio</a>
+  <a href="store.html" class="btn secondary">Browse Store</a>
+</div>
   </div>
 
-  <div class="hero-visual"></div>
+  <!-- RIGHT SCROLLING IMAGE STRIP -->
+  <div class="hero-visual">
+
+  <img class="hero-slide active" src="imagefiles/WhatsApp Image 2025-11-16 at 19.27.53_8e1aeee5.jpg" alt="">
+  <img class="hero-slide" src="imagefiles/WhatsApp Image 2025-11-16 at 19.26.13_8c8b2bf4.jpg" alt="">
+  <img class="hero-slide" src="imagefiles/IMG-20251101-WA0009.jpg"">
+  <img class="hero-slide" src="imagefiles/Horse Emblem.png" alt="">
+
+</div>
 
 </section>
+
+<!-- VALUE SECTION -->
+<section class="section">
+
+  <h2>Why choose us for your next project?</h2>
+
+  <div class="grid-3">
+
+    <div class="card">
+      <h3>Clean, usable models</h3>
+      <p>Structured and organized 3D assets that are easy to edit, export, and integrate into your workflow.</p>
+    </div>
+
+    <div class="card">
+      <h3>Made for real production</h3>
+      <p>Models prepared with practical use in mind — from prototyping to fabrication and digital use.</p>
+    </div>
+
+    <div class="card">
+      <h3>Reliable delivery</h3>
+      <p>Clear communication and consistent turnaround times for international clients.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SERVICES -->
+<section class="section dark">
+
+  <h2>Services</h2>
+
+  <div class="grid-2">
+
+    <div class="card wide">
+      <h3>Custom 3D CAD Work</h3>
+      <p>Design support for parts, assemblies, and product ideas from concept through to usable models.</p>
+    </div>
+
+    <div class="card wide">
+      <h3>3D Print Preparation</h3>
+      <p>Models prepared for printing with attention to structure, fit, and real-world constraints.</p>
+    </div>
+
+    <div class="card wide">
+      <h3>Digital Asset Creation</h3>
+      <p>Optimized models for games, visualization, and general digital use with clean geometry.</p>
+    </div>
+
+    <div class="card wide">
+      <h3>Design Support & Iteration</h3>
+      <p>Assistance refining ideas into practical, workable designs through iteration and feedback.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+
+  <h2>Have a project in mind?</h2>
+  <p>Send the details and we’ll turn it into a workable design you can actually use.</p>
+
+  <br>
+
+  <a href="contact.html" class="btn primary">Get in touch</a>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <p>© 2023 WBF Solutions & Design</p>
+
+</footer>
+
+<script type="module" src="script.js"></script>
+
+<!-- SIDE MENU -->
+<div id="sideMenu" class="side-menu">
+
+  <div class="side-header">
+    <h3>Menu</h3>
+    <span onclick="toggleMenu()" class="close-btn">×</span>
+  </div>
+
+  <div class="side-content">
+
+    <div class="menu-section">
+      <h4>Account</h4>
+      <a href="profile.html">User Account</a>
+      <a href="#" id="sideLogout">Logout</a>
+    </div>
+
+  <div class="menu-section">
+  <h4>Legal</h4>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms of Use</a>
+</div>
+
+<div class="menu-section">
+  <h4>Site</h4>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+    <div class="menu-section">
+      <h4>Social</h4>
+      <a href="https://www.instagram.com/wbf_solutions_design/" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/share/1EL3WsSLWQ/" target="_blank">Facebook</a>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
 </body>
 </html>

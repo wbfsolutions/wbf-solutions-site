@@ -10,9 +10,8 @@
 
 <body class="auth-page">
 
-<div class="auth-page">
-
- <nav class="navbar">
+<!-- NAVBAR -->
+<nav class="navbar">
 
   <div class="logo">
     <img src="Logo.png" alt="Logo" height="32">
@@ -25,34 +24,67 @@
     <a href="contact.html">Contact</a>
   </div>
 
-  <div class="auth-links">
-    <a href="login.html">Sign In</a>
-    <a href="signup.html" class="btn-small">Sign Up</a>
+  <div class="auth-links" id="authLinks">
+
+    <span id="userName" style="display:none; margin-right:15px; color:#F8FAFC; font-size:14px;"></span>
+
+    <a href="login.html" id="loginLink">Sign In</a>
+    <a href="signup.html" id="signupLink" class="btn-small">Sign Up</a>
+
+    <a href="#" id="logoutLink" style="display:none;">Logout</a>
+
   </div>
 
 </nav>
 
-  <h1>Create Account</h1>
+<!-- PAGE CONTENT -->
+<h1>Create Account</h1>
 
-  <div class="auth-card">
+<div class="auth-card">
 
-    <input id="name" type="text" placeholder="Full Name">
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
-    <input id="confirmPassword" type="password" placeholder="Confirm Password">
+  <input id="name" type="text" placeholder="Your Name">
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <input id="confirmPassword" type="password" placeholder="Confirm Password">
 
-    <button onclick="signUp()" class="btn primary">Sign Up</button>
+  <!-- ✅ MAILING LIST CONSENT -->
+  <label style="font-size:12px; color:#94A3B8; text-align:left;">
+    <input type="checkbox" id="newsletterOptIn">
+    I agree to receive occasional updates and product/news emails
+  </label>
 
-    <p id="error" style="color:#ff6b6b; margin-top:10px;"></p>
+  <!-- LEGAL CONSENT -->
+<label style="font-size:12px; color:#94A3B8; display:block; margin-top:10px; line-height:1.4;">
+  <input type="checkbox" id="acceptLegal">
+  I agree to the <a href="terms.html" target="_blank">Terms of Use</a> and
+  <a href="privacy.html" target="_blank">Privacy Policy</a>
+</label>
 
-  </div>
+  <button onclick="signUp()" class="btn primary">Sign Up</button>
+
+  <p id="error" style="color:#ff6b6b; margin-top:10px;"></p>
 
 </div>
 
+<!-- FIREBASE SCRIPT -->
 <script type="module">
 import { auth, db } from "./firebase.js";
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { setDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendEmailVerification
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import {
+  setDoc,
+  doc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
 window.signUp = async function () {
 
@@ -60,12 +92,23 @@ window.signUp = async function () {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
+  const acceptLegal = document.getElementById("acceptLegal").checked;
+
+  const newsletterOptIn = document.getElementById("newsletterOptIn").checked;
   const errorBox = document.getElementById("error");
 
   errorBox.textContent = "";
 
+  // =========================
+  // VALIDATION
+  // =========================
   if (!name || !email || !password || !confirmPassword) {
     errorBox.textContent = "Please fill in all fields.";
+    return;
+  }
+
+  if (!validateEmail(email)) {
+    errorBox.textContent = "Invalid email address.";
     return;
   }
 
@@ -79,24 +122,70 @@ window.signUp = async function () {
     return;
   }
 
+  if (!acceptLegal) {
+  errorBox.textContent = "You must accept the Terms of Use and Privacy Policy to continue.";
+  return;
+}
+
   try {
+
+    // =========================
+    // CREATE AUTH USER
+    // =========================
     const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
-    await setDoc(doc(db, "users", userCred.user.uid), {
-      name: name,
-      email: email,
-      createdAt: new Date()
+    // =========================
+    // PROFILE NAME
+    // =========================
+    await updateProfile(userCred.user, {
+      displayName: name
     });
 
-    alert("Account created successfully!");
-    window.location.href = "index.html";
+    // =========================
+    // EMAIL VERIFICATION
+    // =========================
+    await sendEmailVerification(userCred.user);
+
+    // =========================
+    // FIRESTORE USER RECORD
+    // =========================
+    await setDoc(doc(db, "users", userCred.user.uid), {
+      uid: userCred.user.uid,
+
+      name,
+      email,
+
+      emailVerified: false, // updated later when user logs in
+      newsletterOptIn: newsletterOptIn,
+
+      consent: {
+        marketing: newsletterOptIn,
+        acceptedAt: newsletterOptIn ? serverTimestamp() : null,
+        version: "1.0"
+      },
+
+      consent: {
+  legalAccepted: acceptLegal,
+  acceptedAt: new Date(),
+  version: "1.0",
+  marketing: newsletterOptIn
+},
+
+      createdAt: serverTimestamp()
+    });
+
+    alert("Account created. Please verify your email before signing in.");
+
+    window.location.href = "login.html";
 
   } catch (err) {
     errorBox.textContent = err.message;
   }
 };
-
 </script>
+
+<!-- GLOBAL SCRIPT -->
+<script type="module" src="script.js"></script>
 
 </body>
 </html>

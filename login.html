@@ -10,7 +10,7 @@
 
 <body class="auth-page">
 
-  <!-- NAVBAR (NOT INSIDE CENTERED LAYOUT) -->
+<!-- NAVBAR -->
 <nav class="navbar">
 
   <div class="logo">
@@ -24,36 +24,50 @@
     <a href="contact.html">Contact</a>
   </div>
 
-  <div class="auth-links">
-    <a href="login.html">Sign In</a>
-    <a href="signup.html" class="btn-small">Sign Up</a>
+  <div class="auth-links" id="authLinks">
+
+    <!-- 🔥 USER NAME (hidden until logged in) -->
+    <span id="userName" style="display:none; margin-right:15px; color:#F8FAFC; font-size:14px;"></span>
+
+    <a href="login.html" id="loginLink">Sign In</a>
+    <a href="signup.html" id="signupLink" class="btn-small">Sign Up</a>
+
+    <a href="#" id="logoutLink" style="display:none;">Logout</a>
+
   </div>
 
 </nav>
 
-  <!-- AUTH CONTENT -->
-  <div class="auth-wrapper">
+<!-- AUTH CONTENT -->
+<h1>Login</h1>
 
-    <div>
-      <h1>Login</h1>
+<div class="auth-card">
 
-      <div class="auth-card">
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
 
-        <input id="email" type="email" placeholder="Email">
-        <input id="password" type="password" placeholder="Password">
+  <button onclick="login()" class="btn primary">Login</button>
 
-        <button onclick="login()" class="btn primary">Login</button>
+  <p id="error" style="color:#ff6b6b; margin-top:10px;"></p>
 
-        <p id="error" style="color:#ff6b6b;"></p>
+  <p style="margin-top:10px;">
+  <a href="#" id="forgotPassword" style="color:#6AA6FF; font-size:14px;">
+    Forgot password?
+  </a>
+</p>
 
-      </div>
-    </div>
+<p id="error" style="color:#ff6b6b; margin-top:10px;"></p>
+<p id="success" style="color:#4ade80; margin-top:10px;"></p>
 
-  </div>
+</div>
 
+<!-- FIREBASE LOGIN LOGIC -->
 <script type="module">
 import { auth } from "./firebase.js";
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  signInWithEmailAndPassword,
+  sendEmailVerification
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 window.login = async function () {
 
@@ -64,18 +78,40 @@ window.login = async function () {
   errorBox.textContent = "";
 
   if (!email || !password) {
-    errorBox.textContent = "Fill all fields";
+    errorBox.textContent = "Please enter email and password.";
     return;
   }
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCred.user;
+
+    // 🚫 BLOCK IF NOT VERIFIED
+    if (!user.emailVerified) {
+
+      await sendEmailVerification(user);
+
+      errorBox.textContent =
+        "Email not verified. A new verification email has been sent.";
+
+      // optional: sign them out immediately
+      await auth.signOut();
+
+      return;
+    }
+
+    // ✅ ALLOW LOGIN
     window.location.href = "index.html";
+
   } catch (err) {
     errorBox.textContent = err.message;
   }
 };
 </script>
+
+<!-- ✅ GLOBAL NAVBAR + AUTH STATE SCRIPT (CRITICAL) -->
+<script type="module" src="script.js"></script>
 
 </body>
 </html>

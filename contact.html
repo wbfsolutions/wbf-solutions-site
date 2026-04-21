@@ -22,13 +22,26 @@
     <a href="contact.html">Contact</a>
   </div>
 
-  <div class="auth-links">
-    <a href="login.html">Sign In</a>
-    <a href="signup.html" class="btn-small">Sign Up</a>
+  <div class="auth-links" id="authLinks">
+
+    <span id="userName" style="display:none; margin-right:15px; color:#F8FAFC; font-size:14px;"></span>
+
+    <a href="login.html" id="loginLink">Sign In</a>
+    <a href="signup.html" id="signupLink" class="btn-small">Sign Up</a>
+
+    <a href="#" id="logoutLink" style="display:none;">Logout</a>
+
+  </div>
+
+  <!-- 3 DOT MENU -->
+  <div class="menu-toggle" onclick="toggleMenu()">
+    ⋮
   </div>
 
 </nav>
 <br>
+<br>
+<!-- PAGE CONTENT -->
 <h1>Get In Touch</h1>
 
 <h2>Call:</h2>
@@ -38,7 +51,6 @@
     <a href="tel:+27609758349">+27 60 975 8349</a>
   </div>
 </div>
-
 
 <h2>Message:</h2>
 <div class="message-grid">
@@ -58,7 +70,6 @@
   </div>
 
 </div>
-
 
 <h2>Email:</h2>
 <div class="email-grid">
@@ -85,3 +96,50 @@
   </div>
 
 </div>
+
+<!-- FIREBASE SCRIPT -->
+<script type="module" src="script.js"></script>
+
+<!-- SIDE MENU (ONLY ONE INSTANCE) -->
+<div id="sideMenu" class="side-menu">
+
+  <div class="side-header">
+    <h3>Menu</h3>
+    <span onclick="toggleMenu()" class="close-btn">×</span>
+  </div>
+
+  <div class="side-content">
+
+    <div class="menu-section">
+      <h4>Account</h4>
+      <a href="profile.html">User Account</a>
+      <a href="#" id="sideLogout">Logout</a>
+    </div>
+
+    <div class="menu-section">
+  <h4>Legal</h4>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms of Use</a>
+</div>
+
+<div class="menu-section">
+  <h4>Site</h4>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+    <div class="menu-section">
+      <h4>Social</h4>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://facebook.com" target="_blank">Facebook</a>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+</body>
+</html>
