@@ -11,34 +11,40 @@
 <!-- NAVBAR -->
 <nav class="navbar">
 
-  <div class="logo">
-    <img src="Logo.png" alt="Logo" height="32">
+  <!-- LEFT -->
+  <div class="nav-left">
+    <div class="logo">
+      <img src="Logo.png" alt="Logo" height="32">
+    </div>
   </div>
 
-  <div class="nav-links">
+  <!-- CENTER -->
+  <div class="nav-center">
     <a href="index.html">Home</a>
     <a href="portfolio.html">Portfolio</a>
     <a href="store.html">Store</a>
     <a href="contact.html">Contact</a>
   </div>
 
-  <div class="auth-links" id="authLinks">
+  <!-- RIGHT -->
+  <div class="nav-right">
 
-    <span id="userName" style="display:none; margin-right:15px; color:#F8FAFC; font-size:14px;"></span>
+    <div class="auth-links">
 
-    <a href="login.html" id="loginLink">Sign In</a>
-    <a href="signup.html" id="signupLink" class="btn-small">Sign Up</a>
+      <span id="userName" style="display:none;"></span>
 
-    <a href="#" id="logoutLink" style="display:none;">Logout</a>
+      <a href="login.html" id="loginLink">Sign In</a>
+      <a href="signup.html" id="signupLink">Sign Up</a>
+      <a href="#" id="logoutLink" style="display:none;">Logout</a>
 
-  </div>
+    </div>
 
-  <!-- 3 DOT MENU -->
-  <div class="menu-toggle" onclick="toggleMenu()">
-    ⋮
+    <div class="menu-toggle" onclick="toggleMenu()">⋮</div>
+
   </div>
 
 </nav>
+
 <br>
 <br>
 <!-- PAGE CONTENT -->
@@ -119,7 +125,7 @@
     <div class="menu-section">
   <h4>Legal</h4>
   <a href="privacy.html">Privacy Policy</a>
-  <a href="terms.html">Terms of Use</a>
+  <a href="terms.html">Terms & Conditions</a>
 </div>
 
 <div class="menu-section">
@@ -137,6 +143,13 @@
   </div>
 
 </div>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <p>© 2023 WBF Solutions & Design</p>
+
+</footer>
 
 <!-- OVERLAY -->
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>

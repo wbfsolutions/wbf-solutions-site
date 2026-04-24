@@ -6,6 +6,9 @@
   <title>Sign Up</title>
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body class="auth-page">
@@ -13,52 +16,83 @@
 <!-- NAVBAR -->
 <nav class="navbar">
 
-  <div class="logo">
-    <img src="Logo.png" alt="Logo" height="32">
+  <!-- LEFT -->
+  <div class="nav-left">
+    <div class="logo">
+      <img src="Logo.png" alt="Logo" height="32">
+    </div>
   </div>
 
-  <div class="nav-links">
+  <!-- CENTER -->
+  <div class="nav-center">
     <a href="index.html">Home</a>
     <a href="portfolio.html">Portfolio</a>
     <a href="store.html">Store</a>
     <a href="contact.html">Contact</a>
   </div>
 
-  <div class="auth-links" id="authLinks">
+  <!-- RIGHT -->
+  <div class="nav-right">
 
-    <span id="userName" style="display:none; margin-right:15px; color:#F8FAFC; font-size:14px;"></span>
+    <div class="auth-links">
 
-    <a href="login.html" id="loginLink">Sign In</a>
-    <a href="signup.html" id="signupLink" class="btn-small">Sign Up</a>
+      <span id="userName" style="display:none;"></span>
 
-    <a href="#" id="logoutLink" style="display:none;">Logout</a>
+      <a href="login.html" id="loginLink">Sign In</a>
+      <a href="signup.html" id="signupLink">Sign Up</a>
+      <a href="#" id="logoutLink" style="display:none;">Logout</a>
+
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">⋮</div>
 
   </div>
 
 </nav>
 
-<!-- PAGE CONTENT -->
+<!-- PAGE -->
 <h1>Create Account</h1>
 
 <div class="auth-card">
 
+  <!-- BASIC INFO -->
   <input id="name" type="text" placeholder="Your Name">
   <input id="email" type="email" placeholder="Email">
+
+  <!-- COUNTRY -->
+  <input id="country" list="countryList" placeholder="Select Country">
+  <datalist id="countryList"></datalist>
+
+  <!-- ACCOUNT TYPE -->
+  <select id="accountType">
+    <option value="private">Private</option>
+    <option value="company">Company / Organization</option>
+  </select>
+
+  <!-- COMPANY NAME -->
+  <input id="companyName" type="text" placeholder="Company Name" style="display:none;">
+
+  <!-- PASSWORDS -->
   <input id="password" type="password" placeholder="Password">
   <input id="confirmPassword" type="password" placeholder="Confirm Password">
 
-  <!-- ✅ MAILING LIST CONSENT -->
-  <label style="font-size:12px; color:#94A3B8; text-align:left;">
+  <!-- CHECKBOXES -->
+  <label class="check-row">
     <input type="checkbox" id="newsletterOptIn">
-    I agree to receive occasional updates and product/news emails
+    <span>Receive occasional updates and product emails</span>
   </label>
 
-  <!-- LEGAL CONSENT -->
-<label style="font-size:12px; color:#94A3B8; display:block; margin-top:10px; line-height:1.4;">
-  <input type="checkbox" id="acceptLegal">
-  I agree to the <a href="terms.html" target="_blank">Terms of Use</a> and
-  <a href="privacy.html" target="_blank">Privacy Policy</a>
-</label>
+  <label class="check-row">
+    <input type="checkbox" id="acceptLegal">
+    <span>
+      I agree to the <a href="terms.html" target="_blank">Terms</a> and
+      <a href="privacy.html" target="_blank">Privacy Policy</a>
+    </span>
+  </label>
+
+  <button onclick="signInWithGoogle()" class="btn primary">
+  Continue with Google
+</button>
 
   <button onclick="signUp()" class="btn primary">Sign Up</button>
 
@@ -66,126 +100,161 @@
 
 </div>
 
-<!-- FIREBASE SCRIPT -->
+<!-- =========================
+     FIREBASE + SUPABASE SCRIPT
+========================= -->
 <script type="module">
-import { auth, db } from "./firebase.js";
-
+import { auth } from "./firebase.js";
 import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-  sendEmailVerification
+  onAuthStateChanged,
+  signOut,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-import {
-  setDoc,
-  doc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+window.addEventListener("DOMContentLoaded", () => {
 
-function validateEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+  const loginLink = document.getElementById("loginLink");
+  const signupLink = document.getElementById("signupLink");
+  const logoutLink = document.getElementById("logoutLink");
+  const userName = document.getElementById("userName");
 
-window.signUp = async function () {
+  /* =========================
+     AUTH STATE
+  ========================= */
+  onAuthStateChanged(auth, (user) => {
 
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
-  const acceptLegal = document.getElementById("acceptLegal").checked;
+    const loggedIn = !!user;
 
-  const newsletterOptIn = document.getElementById("newsletterOptIn").checked;
-  const errorBox = document.getElementById("error");
+    if (loginLink) loginLink.style.display = loggedIn ? "none" : "inline-block";
+    if (signupLink) signupLink.style.display = loggedIn ? "none" : "inline-block";
+    if (logoutLink) logoutLink.style.display = loggedIn ? "inline-block" : "none";
 
-  errorBox.textContent = "";
+    if (userName) {
+      userName.style.display = loggedIn ? "inline-block" : "none";
+      userName.textContent = user?.displayName || "User";
+    }
+  });
 
-  // =========================
-  // VALIDATION
-  // =========================
-  if (!name || !email || !password || !confirmPassword) {
-    errorBox.textContent = "Please fill in all fields.";
-    return;
-  }
-
-  if (!validateEmail(email)) {
-    errorBox.textContent = "Invalid email address.";
-    return;
-  }
-
-  if (password !== confirmPassword) {
-    errorBox.textContent = "Passwords do not match.";
-    return;
-  }
-
-  if (password.length < 6) {
-    errorBox.textContent = "Password must be at least 6 characters.";
-    return;
-  }
-
-  if (!acceptLegal) {
-  errorBox.textContent = "You must accept the Terms of Use and Privacy Policy to continue.";
-  return;
-}
-
-  try {
-
-    // =========================
-    // CREATE AUTH USER
-    // =========================
-    const userCred = await createUserWithEmailAndPassword(auth, email, password);
-
-    // =========================
-    // PROFILE NAME
-    // =========================
-    await updateProfile(userCred.user, {
-      displayName: name
+  /* =========================
+     LOGOUT
+  ========================= */
+  if (logoutLink) {
+    logoutLink.addEventListener("click", async (e) => {
+      e.preventDefault();
+      await signOut(auth);
+      window.location.href = "index.html";
     });
-
-    // =========================
-    // EMAIL VERIFICATION
-    // =========================
-    await sendEmailVerification(userCred.user);
-
-    // =========================
-    // FIRESTORE USER RECORD
-    // =========================
-    await setDoc(doc(db, "users", userCred.user.uid), {
-      uid: userCred.user.uid,
-
-      name,
-      email,
-
-      emailVerified: false, // updated later when user logs in
-      newsletterOptIn: newsletterOptIn,
-
-      consent: {
-        marketing: newsletterOptIn,
-        acceptedAt: newsletterOptIn ? serverTimestamp() : null,
-        version: "1.0"
-      },
-
-      consent: {
-  legalAccepted: acceptLegal,
-  acceptedAt: new Date(),
-  version: "1.0",
-  marketing: newsletterOptIn
-},
-
-      createdAt: serverTimestamp()
-    });
-
-    alert("Account created. Please verify your email before signing in.");
-
-    window.location.href = "login.html";
-
-  } catch (err) {
-    errorBox.textContent = err.message;
   }
-};
+
+  /* =========================
+     SIDE MENU (FIXED)
+  ========================= */
+  const menu = document.getElementById("sideMenu");
+  const overlay = document.getElementById("overlay");
+
+  window.toggleMenu = function () {
+    if (!menu || !overlay) return;
+
+    menu.classList.toggle("open");
+    overlay.classList.toggle("show");
+  };
+
+  if (overlay) {
+    overlay.addEventListener("click", () => {
+      menu.classList.remove("open");
+      overlay.classList.remove("show");
+    });
+  }
+
+  const sideLogout = document.getElementById("sideLogout");
+
+  if (sideLogout) {
+    sideLogout.addEventListener("click", async (e) => {
+      e.preventDefault();
+      await signOut(auth);
+      window.location.href = "index.html";
+    });
+  }
+
+  /* =========================
+     FORGOT PASSWORD
+  ========================= */
+  const forgotPassword = document.getElementById("forgotPassword");
+
+  if (forgotPassword) {
+    forgotPassword.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("email")?.value?.trim();
+      const errorBox = document.getElementById("error");
+      const successBox = document.getElementById("success");
+
+      if (!email) {
+        if (errorBox) errorBox.textContent = "Enter email first.";
+        return;
+      }
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        if (successBox) successBox.textContent = "Reset email sent.";
+      } catch (err) {
+        if (errorBox) errorBox.textContent = err.message;
+      }
+    });
+  }
+
+});
 </script>
 
-<!-- GLOBAL SCRIPT -->
 <script type="module" src="script.js"></script>
+
+<!-- SIDE MENU -->
+<div id="sideMenu" class="side-menu">
+
+  <div class="side-header">
+    <h3>Menu</h3>
+    <span onclick="toggleMenu()" class="close-btn">×</span>
+  </div>
+
+  <div class="side-content">
+
+    <div class="menu-section">
+      <h4>Account</h4>
+      <a href="profile.html">User Account</a>
+      <a href="#" id="sideLogout">Logout</a>
+    </div>
+
+  <div class="menu-section">
+  <h4>Legal</h4>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms & Conditions</a>
+</div>
+
+<div class="menu-section">
+  <h4>Site</h4>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+    <div class="menu-section">
+      <h4>Social</h4>
+      <a href="https://www.instagram.com/wbf_solutions_design/" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/share/1EL3WsSLWQ/" target="_blank">Facebook</a>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <p>© 2023 WBF Solutions & Design</p>
+
+</footer>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
 </body>
 </html>

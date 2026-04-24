@@ -13,20 +13,36 @@
 <!-- NAVBAR -->
 <nav class="navbar">
 
-  <div class="logo">
-    <img src="Logo.png" alt="Logo" height="32">
+  <!-- LEFT -->
+  <div class="nav-left">
+    <div class="logo">
+      <img src="Logo.png" alt="Logo" height="32">
+    </div>
   </div>
 
-  <div class="nav-links">
+  <!-- CENTER -->
+  <div class="nav-center">
     <a href="index.html">Home</a>
     <a href="portfolio.html">Portfolio</a>
     <a href="store.html">Store</a>
     <a href="contact.html">Contact</a>
   </div>
 
-  <div class="auth-links">
-    <a href="login.html">Sign In</a>
-    <a href="signup.html" class="btn-small">Sign Up</a>
+  <!-- RIGHT -->
+  <div class="nav-right">
+
+    <div class="auth-links">
+
+      <span id="userName" style="display:none;"></span>
+
+      <a href="login.html" id="loginLink">Sign In</a>
+      <a href="signup.html" id="signupLink">Sign Up</a>
+      <a href="#" id="logoutLink" style="display:none;">Logout</a>
+
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">⋮</div>
+
   </div>
 
 </nav>
@@ -34,7 +50,7 @@
 <!-- CONTENT -->
 <section class="legal-container">
 
-  <h1>Terms of Use</h1>
+  <h1>Terms & Conditions</h1>
 
   <p>Last updated: 2026</p>
 
@@ -114,6 +130,56 @@
   </p>
 
 </section>
+
+<script type="module" src="script.js"></script>
+
+<!-- SIDE MENU -->
+<div id="sideMenu" class="side-menu">
+
+  <div class="side-header">
+    <h3>Menu</h3>
+    <span onclick="toggleMenu()" class="close-btn">×</span>
+  </div>
+
+  <div class="side-content">
+
+    <div class="menu-section">
+      <h4>Account</h4>
+      <a href="profile.html">User Account</a>
+      <a href="#" id="sideLogout">Logout</a>
+    </div>
+
+  <div class="menu-section">
+  <h4>Legal</h4>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms & Conditions</a>
+</div>
+
+<div class="menu-section">
+  <h4>Site</h4>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+    <div class="menu-section">
+      <h4>Social</h4>
+      <a href="https://www.instagram.com/wbf_solutions_design/" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/share/1EL3WsSLWQ/" target="_blank">Facebook</a>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <p>© 2023 WBF Solutions & Design</p>
+
+</footer>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
 </body>
 </html>

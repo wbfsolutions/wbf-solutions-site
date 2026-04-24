@@ -13,26 +13,35 @@
 <!-- NAVBAR -->
 <nav class="navbar">
 
-  <div class="logo">
-    <img src="Logo.png" alt="Logo" height="32">
+  <!-- LEFT -->
+  <div class="nav-left">
+    <div class="logo">
+      <img src="Logo.png" alt="Logo" height="32">
+    </div>
   </div>
 
-  <div class="nav-links">
+  <!-- CENTER -->
+  <div class="nav-center">
     <a href="index.html">Home</a>
     <a href="portfolio.html">Portfolio</a>
     <a href="store.html">Store</a>
     <a href="contact.html">Contact</a>
   </div>
 
-  <div class="auth-links" id="authLinks">
+  <!-- RIGHT -->
+  <div class="nav-right">
 
-    <!-- 🔥 USER NAME (hidden until logged in) -->
-    <span id="userName" style="display:none; margin-right:15px; color:#F8FAFC; font-size:14px;"></span>
+    <div class="auth-links">
 
-    <a href="login.html" id="loginLink">Sign In</a>
-    <a href="signup.html" id="signupLink" class="btn-small">Sign Up</a>
+      <span id="userName" style="display:none;"></span>
 
-    <a href="#" id="logoutLink" style="display:none;">Logout</a>
+      <a href="login.html" id="loginLink">Sign In</a>
+      <a href="signup.html" id="signupLink">Sign Up</a>
+      <a href="#" id="logoutLink" style="display:none;">Logout</a>
+
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">⋮</div>
 
   </div>
 
@@ -112,6 +121,56 @@ window.login = async function () {
 
 <!-- ✅ GLOBAL NAVBAR + AUTH STATE SCRIPT (CRITICAL) -->
 <script type="module" src="script.js"></script>
+
+<script type="module" src="script.js"></script>
+
+<!-- SIDE MENU -->
+<div id="sideMenu" class="side-menu">
+
+  <div class="side-header">
+    <h3>Menu</h3>
+    <span onclick="toggleMenu()" class="close-btn">×</span>
+  </div>
+
+  <div class="side-content">
+
+    <div class="menu-section">
+      <h4>Account</h4>
+      <a href="profile.html">User Account</a>
+      <a href="#" id="sideLogout">Logout</a>
+    </div>
+
+  <div class="menu-section">
+  <h4>Legal</h4>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms & Conditions</a>
+</div>
+
+<div class="menu-section">
+  <h4>Site</h4>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+    <div class="menu-section">
+      <h4>Social</h4>
+      <a href="https://www.instagram.com/wbf_solutions_design/" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/share/1EL3WsSLWQ/" target="_blank">Facebook</a>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <p>© 2023 WBF Solutions & Design</p>
+
+</footer>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
 </body>
 </html>
