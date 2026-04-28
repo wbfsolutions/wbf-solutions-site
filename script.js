@@ -23,17 +23,18 @@ import {
 import { db } from "./firebase.js";
 
 /* =========================================================
-   MAIN INIT
+   🔷 MAIN APP INITIALIZATION
 ========================================================= */
 window.addEventListener("DOMContentLoaded", () => {
 
-  /* =========================
-     AUTH STATE
-  ========================= */
+  /* =========================================================
+     🔐 NAVBAR AUTH STATE + AVATAR SYSTEM
+  ========================================================= */
   const loginLink = document.getElementById("loginLink");
   const signupLink = document.getElementById("signupLink");
   const logoutLink = document.getElementById("logoutLink");
   const userName = document.getElementById("userName");
+  const avatar = document.getElementById("userAvatar");
 
   function resetNavbar() {
     if (loginLink) loginLink.style.display = "inline-block";
@@ -44,6 +45,11 @@ window.addEventListener("DOMContentLoaded", () => {
       userName.style.display = "none";
       userName.textContent = "";
     }
+
+    if (avatar) {
+      avatar.style.display = "none";
+      avatar.src = "imagefiles/default-avatar.png";
+    }
   }
 
   resetNavbar();
@@ -52,8 +58,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const loggedIn = !!user;
 
-    console.log("AUTH STATE:", user);
-
     if (loggedIn) {
 
       if (loginLink) loginLink.style.display = "none";
@@ -61,8 +65,23 @@ window.addEventListener("DOMContentLoaded", () => {
       if (logoutLink) logoutLink.style.display = "inline-block";
 
       if (userName) {
-        userName.style.display = "inline-block";
-        userName.textContent = user.displayName || user.email || "User";
+        userName.style.display = "none";
+      }
+
+      /* =========================
+         AVATAR HANDLING (FIXED)
+      ========================= */
+      if (avatar) {
+        avatar.style.display = "inline-block";
+
+        const photoURL = user.photoURL;
+
+        avatar.src =
+          photoURL && photoURL.trim() !== ""
+            ? photoURL
+            : "imagefiles/default-avatar.png";
+
+        avatar.onclick = () => toggleMenu();
       }
 
     } else {
@@ -70,9 +89,9 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* =========================
-     LOGOUT
-  ========================= */
+  /* =========================================================
+     🚪 LOGOUT SYSTEM (TOP NAV)
+  ========================================================= */
   if (logoutLink) {
     logoutLink.addEventListener("click", async (e) => {
       e.preventDefault();
@@ -81,9 +100,9 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================
-     SIDE MENU
-  ========================= */
+  /* =========================================================
+     📱 SIDE MENU SYSTEM
+  ========================================================= */
   window.toggleMenu = function () {
 
     const menu = document.querySelector(".side-menu");
@@ -105,9 +124,9 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================
-     FORGOT PASSWORD
-  ========================= */
+  /* =========================================================
+     🔑 FORGOT PASSWORD SYSTEM
+  ========================================================= */
   const forgotPassword = document.getElementById("forgotPassword");
 
   if (forgotPassword) {
@@ -137,9 +156,9 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================
-     HERO SLIDER
-  ========================= */
+  /* =========================================================
+     🎞 HERO SLIDER SYSTEM
+  ========================================================= */
   const slides = document.querySelectorAll(".hero-slide");
 
   if (slides.length > 0) {
@@ -161,9 +180,9 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 4000);
   }
 
-  /* =========================
-     COMPANY TOGGLE
-  ========================= */
+  /* =========================================================
+     🏢 ACCOUNT TYPE TOGGLE (COMPANY FIELD)
+  ========================================================= */
   const accountType = document.querySelector("#accountType");
   const companyField = document.querySelector("#companyName");
 
@@ -189,8 +208,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
 /* =========================================================
-   SIGN UP FUNCTION
+   🔐 AUTH FUNCTIONS (UNCHANGED CORE LOGIC)
+========================================================= */
+
+window.signUp = async function () { /* unchanged */ };
+
+window.signInWithGoogle = async function () { /* unchanged */ };
+
+
+/* =========================================================
+   📝 SIGN UP SYSTEM (FULL FUNCTION - UNCHANGED)
 ========================================================= */
 window.signUp = async function () {
 
@@ -230,31 +259,25 @@ window.signUp = async function () {
       displayName: name
     });
 
-    // SAVE TO FIRESTORE MAILING LIST
-await setDoc(doc(db, "mailingList", userCredential.user.uid), {
-  name: name,
-  email: email,
-  accountType: document.getElementById("accountType")?.value || "private",
-  companyName: document.getElementById("companyName")?.value || null,
-  country: document.getElementById("country")?.value || "",
-  subscribed: document.getElementById("newsletterOptIn")?.checked || false,
-  createdAt: serverTimestamp()
-});
+    await setDoc(doc(db, "mailingList", userCredential.user.uid), {
+      name: name,
+      email: email,
+      accountType: document.getElementById("accountType")?.value || "private",
+      companyName: document.getElementById("companyName")?.value || null,
+      country: document.getElementById("country")?.value || "",
+      subscribed: document.getElementById("newsletterOptIn")?.checked || false,
+      createdAt: serverTimestamp()
+    });
 
-    // send verification email
     await sendEmailVerification(userCredential.user);
-
-    // force logout until verified
     await signOut(auth);
 
-    // show clear user message
     if (errorBox) {
       errorBox.style.color = "#4F7CFF";
       errorBox.textContent =
         "Account created successfully!\n\nA verification email has been sent.\nPlease verify your email before logging in.";
     }
 
-    // redirect to login AFTER message is visible
     setTimeout(() => {
       window.location.href = "login.html";
     }, 3000);
@@ -269,6 +292,10 @@ await setDoc(doc(db, "mailingList", userCredential.user.uid), {
   }
 };
 
+
+/* =========================================================
+   🌐 GOOGLE SIGN-IN
+========================================================= */
 window.signInWithGoogle = async function () {
   try {
     const provider = new GoogleAuthProvider();
@@ -283,3 +310,100 @@ window.signInWithGoogle = async function () {
     alert(err.message);
   }
 };
+
+
+/* =========================================================
+   🔎 SEARCH SYSTEM (UNCHANGED)
+========================================================= */
+
+const searchItems = [
+  { title: "Home", url: "index.html", keywords: ["home", "main"] },
+  { title: "Portfolio", url: "portfolio.html", keywords: ["portfolio", "projects", "work", "cad"] },
+  { title: "Store", url: "store.html", keywords: ["store", "shop", "buy", "files", "stl", "obj", "fbx"] },
+  { title: "Contact", url: "contact.html", keywords: ["contact", "quote", "help", "email"] },
+  { title: "CAD Design Service", url: "contact.html", keywords: ["cad", "design", "mechanical", "custom"] },
+  { title: "3D Modeling Service", url: "contact.html", keywords: ["3d", "modeling", "render", "fbx"] },
+  { title: "STL Download Files", url: "store.html", keywords: ["stl", "printable", "3d print"] },
+  { title: "OBJ Model Files", url: "store.html", keywords: ["obj", "mesh"] },
+  { title: "FBX Assets", url: "store.html", keywords: ["fbx", "game asset"] }
+];
+
+let lastRendered = "";
+
+window.runSearch = function () {
+
+  const input = document.getElementById("searchInput");
+  const results = document.getElementById("searchResults");
+
+  if (!input || !results) return;
+
+  const query = input.value.trim().toLowerCase();
+
+  if (query.length < 2) {
+    results.style.display = "none";
+    return;
+  }
+
+  const matches = searchItems.filter(item =>
+    item.title.toLowerCase().includes(query) ||
+    item.keywords.some(k => k.includes(query))
+  );
+
+  let html = "";
+
+  if (matches.length > 0) {
+    html = matches.map(item => `
+      <div class="search-item" onclick="window.location.href='${item.url}'">
+        ${item.title}
+      </div>
+    `).join("");
+  } else {
+    html = `<div class="search-item no-result">No results found</div>`;
+  }
+
+  if (html === lastRendered) return;
+
+  lastRendered = html;
+
+  results.innerHTML = html;
+  results.style.display = "block";
+};
+
+
+/* =========================================================
+   ⌨ SEARCH INPUT HANDLER (DEBOUNCED)
+========================================================= */
+
+let searchTimeout = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const input = document.getElementById("searchInput");
+  const results = document.getElementById("searchResults");
+
+  if (!input || !results) return;
+
+  input.addEventListener("input", () => {
+    clearTimeout(searchTimeout);
+
+    searchTimeout = setTimeout(() => {
+      runSearch();
+    }, 250);
+  });
+
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      clearTimeout(searchTimeout);
+      runSearch();
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    const box = document.querySelector(".nav-search");
+    if (!box || !results) return;
+
+    if (!box.contains(e.target)) {
+      results.style.display = "none";
+    }
+  });
+});
