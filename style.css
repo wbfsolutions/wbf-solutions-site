@@ -839,3 +839,21 @@ canvas {
   opacity: 0.6;
 }
 
+.account-menu {
+  z-index: 1000002; /* higher than 3-dot menu */
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  margin: 20px 0;
+  text-align: center;
+}
+
+.account-info p {
+  font-size: 14px;
+  color: #CBD5E1;
+}

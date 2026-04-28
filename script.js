@@ -28,8 +28,47 @@ import { db } from "./firebase.js";
 window.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================================
+     📱 MENU SYSTEM (FIXED CLEAN VERSION)
+  ========================================================= */
+
+  window.openAccountMenu = function () {
+    const menu = document.getElementById("accountMenu");
+    const overlay = document.querySelector(".overlay");
+
+    if (!menu || !overlay) return;
+
+    menu.classList.add("open");
+    overlay.classList.add("show");
+
+    document.querySelector(".side-menu")?.classList.remove("open");
+  };
+
+  window.toggleMenu = function () {
+    const menu = document.querySelector(".side-menu");
+    const accountMenu = document.getElementById("accountMenu");
+    const overlay = document.querySelector(".overlay");
+
+    if (!menu || !overlay) return;
+
+    accountMenu?.classList.remove("open");
+
+    menu.classList.toggle("open");
+    overlay.classList.toggle("show");
+  };
+
+  window.closeMenus = function () {
+    document.querySelector(".side-menu")?.classList.remove("open");
+    document.getElementById("accountMenu")?.classList.remove("open");
+    document.querySelector(".overlay")?.classList.remove("show");
+  };
+
+  // overlay click closes everything
+  document.querySelector(".overlay")?.addEventListener("click", closeMenus);
+
+  /* =========================================================
      🔐 NAVBAR AUTH STATE + AVATAR SYSTEM
   ========================================================= */
+
   const loginLink = document.getElementById("loginLink");
   const signupLink = document.getElementById("signupLink");
   const logoutLink = document.getElementById("logoutLink");
@@ -54,95 +93,40 @@ window.addEventListener("DOMContentLoaded", () => {
 
   onAuthStateChanged(auth, (user) => {
 
-  if (!user) {
-    resetNavbar();
-    return;
-  }
-
-  if (loginLink) loginLink.style.display = "none";
-  if (signupLink) signupLink.style.display = "none";
-  if (logoutLink) logoutLink.style.display = "inline-block";
-
-  if (userName) {
-    userName.style.display = "none";
-  }
-
-  if (avatar) {
-    avatar.style.display = "inline-block";
-
-    avatar.src = "imagefiles/default-avatar.png";
-
-    avatar.onerror = () => {
-      avatar.src = "imagefiles/default-avatar.png";
-    };
-
-    avatar.onclick = () => toggleMenu();
-  }
-});
-
-  onAuthStateChanged(auth, (user) => {
-
-    const loggedIn = !!user;
-
-    if (loggedIn) {
-
-      if (loginLink) loginLink.style.display = "none";
-      if (signupLink) signupLink.style.display = "none";
-      if (logoutLink) logoutLink.style.display = "inline-block";
-
-      if (userName) {
-        userName.style.display = "none";
-      }
-
-      /* =========================
-         AVATAR HANDLING (FIXED)
-      ========================= */
-if (avatar) {
-  avatar.style.display = "inline-block";
-
-  avatar.src = "imagefiles/default-avatar.png";
-
-  avatar.onerror = () => {
-    avatar.src = "imagefiles/default-avatar.png";
-  };
-
-  avatar.onclick = () => toggleMenu();
-}
-
-    } else {
+    if (!user) {
       resetNavbar();
+      return;
+    }
+
+    if (loginLink) loginLink.style.display = "none";
+    if (signupLink) signupLink.style.display = "none";
+    if (logoutLink) logoutLink.style.display = "inline-block";
+
+    if (userName) {
+      userName.style.display = "none";
+    }
+
+    if (avatar) {
+      avatar.style.display = "inline-block";
+      avatar.src = "imagefiles/default-avatar.png";
+
+      avatar.onerror = () => {
+        avatar.src = "imagefiles/default-avatar.png";
+      };
+
+      // SINGLE CLEAN CLICK HANDLER
+      avatar.onclick = () => {
+        closeMenus();
+        openAccountMenu();
+      };
     }
   });
 
   /* =========================================================
-     🚪 LOGOUT SYSTEM (TOP NAV)
+     🚪 LOGOUT SYSTEM
   ========================================================= */
   if (logoutLink) {
     logoutLink.addEventListener("click", async (e) => {
-      e.preventDefault();
-      await signOut(auth);
-      window.location.href = "index.html";
-    });
-  }
-
-  /* =========================================================
-     📱 SIDE MENU SYSTEM
-  ========================================================= */
-  window.toggleMenu = function () {
-
-    const menu = document.querySelector(".side-menu");
-    const overlay = document.querySelector(".overlay");
-
-    if (!menu || !overlay) return;
-
-    menu.classList.toggle("open");
-    overlay.classList.toggle("show");
-  };
-
-  const sideLogout = document.getElementById("sideLogout");
-
-  if (sideLogout) {
-    sideLogout.addEventListener("click", async (e) => {
       e.preventDefault();
       await signOut(auth);
       window.location.href = "index.html";
@@ -195,18 +179,14 @@ if (avatar) {
     });
 
     setInterval(() => {
-
       slides[current].classList.remove("active");
-
       current = (current + 1) % slides.length;
-
       slides[current].classList.add("active");
-
     }, 4000);
   }
 
   /* =========================================================
-     🏢 ACCOUNT TYPE TOGGLE (COMPANY FIELD)
+     🏢 ACCOUNT TYPE TOGGLE
   ========================================================= */
   const accountType = document.querySelector("#accountType");
   const companyField = document.querySelector("#companyName");
@@ -233,20 +213,26 @@ if (avatar) {
 
 });
 
-
 /* =========================================================
-   🔐 AUTH FUNCTIONS (UNCHANGED CORE LOGIC)
+   🌐 GOOGLE SIGN-IN
 ========================================================= */
+window.signInWithGoogle = async function () {
+  try {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
 
+    window.location.href = "index.html";
 
-window.signInWithGoogle = async function () { /* unchanged */ };
-
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
 
 /* =========================================================
-   📝 SIGN UP SYSTEM (FULL FUNCTION - UNCHANGED)
+   📝 SIGN UP SYSTEM (UNCHANGED)
 ========================================================= */
 window.signUp = async function () {
-
   const name = document.getElementById("name")?.value.trim();
   const email = document.getElementById("email")?.value.trim();
   const password = document.getElementById("password")?.value;
@@ -276,7 +262,6 @@ window.signUp = async function () {
   }
 
   try {
-
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
     await updateProfile(userCredential.user, {
@@ -284,8 +269,8 @@ window.signUp = async function () {
     });
 
     await setDoc(doc(db, "mailingList", userCredential.user.uid), {
-      name: name,
-      email: email,
+      name,
+      email,
       accountType: document.getElementById("accountType")?.value || "private",
       companyName: document.getElementById("companyName")?.value || null,
       country: document.getElementById("country")?.value || "",
@@ -315,119 +300,3 @@ window.signUp = async function () {
     }
   }
 };
-
-
-/* =========================================================
-   🌐 GOOGLE SIGN-IN
-========================================================= */
-window.signInWithGoogle = async function () {
-  try {
-    const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-
-    console.log("Google user:", result.user);
-
-    window.location.href = "index.html";
-
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
-
-
-/* =========================================================
-   🔎 SEARCH SYSTEM (UNCHANGED)
-========================================================= */
-
-const searchItems = [
-  { title: "Home", url: "index.html", keywords: ["home", "main"] },
-  { title: "Portfolio", url: "portfolio.html", keywords: ["portfolio", "projects", "work", "cad"] },
-  { title: "Store", url: "store.html", keywords: ["store", "shop", "buy", "files", "stl", "obj", "fbx"] },
-  { title: "Contact", url: "contact.html", keywords: ["contact", "quote", "help", "email"] },
-  { title: "CAD Design Service", url: "contact.html", keywords: ["cad", "design", "mechanical", "custom"] },
-  { title: "3D Modeling Service", url: "contact.html", keywords: ["3d", "modeling", "render", "fbx"] },
-  { title: "STL Download Files", url: "store.html", keywords: ["stl", "printable", "3d print"] },
-  { title: "OBJ Model Files", url: "store.html", keywords: ["obj", "mesh"] },
-  { title: "FBX Assets", url: "store.html", keywords: ["fbx", "game asset"] }
-];
-
-let lastRendered = "";
-
-window.runSearch = function () {
-
-  const input = document.getElementById("searchInput");
-  const results = document.getElementById("searchResults");
-
-  if (!input || !results) return;
-
-  const query = input.value.trim().toLowerCase();
-
-  if (query.length < 2) {
-    results.style.display = "none";
-    return;
-  }
-
-  const matches = searchItems.filter(item =>
-    item.title.toLowerCase().includes(query) ||
-    item.keywords.some(k => k.includes(query))
-  );
-
-  let html = "";
-
-  if (matches.length > 0) {
-    html = matches.map(item => `
-      <div class="search-item" onclick="window.location.href='${item.url}'">
-        ${item.title}
-      </div>
-    `).join("");
-  } else {
-    html = `<div class="search-item no-result">No results found</div>`;
-  }
-
-  if (html === lastRendered) return;
-
-  lastRendered = html;
-
-  results.innerHTML = html;
-  results.style.display = "block";
-};
-
-
-/* =========================================================
-   ⌨ SEARCH INPUT HANDLER (DEBOUNCED)
-========================================================= */
-
-let searchTimeout = null;
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const input = document.getElementById("searchInput");
-  const results = document.getElementById("searchResults");
-
-  if (!input || !results) return;
-
-  input.addEventListener("input", () => {
-    clearTimeout(searchTimeout);
-
-    searchTimeout = setTimeout(() => {
-      runSearch();
-    }, 250);
-  });
-
-  input.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      clearTimeout(searchTimeout);
-      runSearch();
-    }
-  });
-
-  document.addEventListener("click", (e) => {
-    const box = document.querySelector(".nav-search");
-    if (!box || !results) return;
-
-    if (!box.contains(e.target)) {
-      results.style.display = "none";
-    }
-  });
-});

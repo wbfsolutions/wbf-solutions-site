@@ -212,8 +212,28 @@
 
 </div>
 
+<div id="accountOverlay" class="overlay"></div>
+
+<div id="accountMenu" class="side-menu account-menu">
+  <div class="side-header">
+    <h3>Account</h3>
+  </div>
+
+  <div class="account-info">
+    <img id="accountAvatar" class="user-avatar" />
+    <p id="accountName"></p>
+    <p id="accountEmail"></p>
+  </div>
+
+  <div class="menu-section">
+    <a href="profile.html">Profile</a>
+    <a href="settings.html">Settings</a>
+    <a id="accountLogout">Logout</a>
+  </div>
+</div>
+
 <!-- OVERLAY -->
-<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+<div class="overlay" onclick="closeMenus()"></div>
 
 </body>
 </html>
