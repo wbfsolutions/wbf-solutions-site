@@ -52,7 +52,33 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  resetNavbar();
+  onAuthStateChanged(auth, (user) => {
+
+  if (!user) {
+    resetNavbar();
+    return;
+  }
+
+  if (loginLink) loginLink.style.display = "none";
+  if (signupLink) signupLink.style.display = "none";
+  if (logoutLink) logoutLink.style.display = "inline-block";
+
+  if (userName) {
+    userName.style.display = "none";
+  }
+
+  if (avatar) {
+    avatar.style.display = "inline-block";
+
+    avatar.src = "imagefiles/default-avatar.png";
+
+    avatar.onerror = () => {
+      avatar.src = "imagefiles/default-avatar.png";
+    };
+
+    avatar.onclick = () => toggleMenu();
+  }
+});
 
   onAuthStateChanged(auth, (user) => {
 
@@ -71,18 +97,17 @@ window.addEventListener("DOMContentLoaded", () => {
       /* =========================
          AVATAR HANDLING (FIXED)
       ========================= */
-      if (avatar) {
-        avatar.style.display = "inline-block";
+if (avatar) {
+  avatar.style.display = "inline-block";
 
-        const photoURL = user.photoURL;
+  avatar.src = "imagefiles/default-avatar.png";
 
-        avatar.src =
-          photoURL && photoURL.trim() !== ""
-            ? photoURL
-            : "imagefiles/default-avatar.png";
+  avatar.onerror = () => {
+    avatar.src = "imagefiles/default-avatar.png";
+  };
 
-        avatar.onclick = () => toggleMenu();
-      }
+  avatar.onclick = () => toggleMenu();
+}
 
     } else {
       resetNavbar();
@@ -213,7 +238,6 @@ window.addEventListener("DOMContentLoaded", () => {
    🔐 AUTH FUNCTIONS (UNCHANGED CORE LOGIC)
 ========================================================= */
 
-window.signUp = async function () { /* unchanged */ };
 
 window.signInWithGoogle = async function () { /* unchanged */ };
 

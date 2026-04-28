@@ -98,6 +98,11 @@ a:hover {
   justify-content: flex-start;
 }
 
+.logo img {
+  height: 50px;   /* increased from 32 */
+  width: auto;
+}
+
 /* CENTER */
 .nav-center {
   display: flex;
@@ -709,28 +714,27 @@ canvas {
 }
 
 /* =========================================
-   ADD SEARCH TO NAVBAR (MATCHES STYLE)
-   Paste below your current navbar CSS
+   NAV SEARCH (CLEAN SINGLE VERSION)
 ========================================= */
 
-/* Search wrapper */
 .nav-search {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
+  gap: 6px;
 }
 
-/* Search input */
+/* input */
 .nav-search input {
-  width: 180px;
+  width: 220px;
   height: 38px;
 
-  padding: 0 38px 0 14px;
+  padding: 6px 38px 6px 10px;
 
   border-radius: 10px;
   border: 1px solid #1F2A44;
 
-  background: #111B2E;
+  background: #0E1626;
   color: #F8FAFC;
 
   font-size: 14px;
@@ -739,18 +743,18 @@ canvas {
   transition: 0.2s ease;
 }
 
-/* Focus glow */
+/* focus */
 .nav-search input:focus {
   border-color: #4F7CFF;
   box-shadow: 0 0 0 3px rgba(79,124,255,0.15);
 }
 
-/* Placeholder */
+/* placeholder */
 .nav-search input::placeholder {
   color: #64748B;
 }
 
-/* Search button */
+/* button */
 .nav-search button {
   position: absolute;
   right: 6px;
@@ -775,9 +779,60 @@ canvas {
   background: rgba(79,124,255,0.15);
 }
 
-/* Keep spacing with auth links */
-.nav-right {
-  gap: 14px;
+/* dropdown */
+.search-results {
+  position: absolute;
+  top: 110%;
+  left: 0;
+
+  width: 100%;
+
+  background: #111B2E;
+  border: 1px solid #1F2A44;
+  border-radius: 10px;
+
+  display: none;
+  z-index: 99999;
+
+  overflow: hidden;
+}
+
+/* items */
+.search-item {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #CBD5E1;
+}
+
+.search-item:hover {
+  background: #0E1626;
+  color: #F8FAFC;
+}
+
+.no-result {
+  opacity: 0.6;
+}
+
+/* mobile */
+@media (max-width: 900px) {
+  .nav-search input {
+    width: 130px;
+    height: 34px;
+    font-size: 13px;
+  }
+
+  .nav-search button {
+    width: 24px;
+    height: 24px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-search {
+    display: none;
+  }
 }
 
 /* =========================================
@@ -859,8 +914,8 @@ canvas {
 }
 
 .user-avatar {
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
 
