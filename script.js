@@ -8,6 +8,74 @@ import {
   updateProfile
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+import { getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+onAuthStateChanged(auth, async (user) => {
+
+  if (!user) {
+    accountName.textContent = "Guest";
+    return;
+  }
+
+  let name = user.displayName;
+
+  // fallback to Firestore if missing
+  if (!name) {
+    const docRef = doc(db, "mailingList", user.uid);
+    const snap = await getDoc(docRef);
+
+    if (snap.exists()) {
+      name = snap.data().name;
+    }
+  }
+
+  accountName.textContent = name || "User";
+});
+
+onAuthStateChanged(auth, (user) => {
+
+  const accountAvatar = document.getElementById("accountAvatar");
+  const accountName = document.getElementById("accountName");
+  const accountEmail = document.getElementById("accountEmail");
+
+  if (!user) {
+    resetNavbar();
+
+    if (accountName) accountName.textContent = "Guest";
+    if (accountEmail) accountEmail.textContent = "";
+    if (accountAvatar) accountAvatar.src = "imagefiles/default-avatar.png";
+
+    return;
+  }
+
+  // NAVBAR STATE
+  if (loginLink) loginLink.style.display = "none";
+  if (signupLink) signupLink.style.display = "none";
+
+  if (avatar) {
+    avatar.style.display = "inline-block";
+    avatar.src = user.photoURL || "imagefiles/default-avatar.png";
+
+    avatar.onclick = () => {
+      closeMenus();
+      openAccountMenu();
+    };
+  }
+
+  // 🔥 ACCOUNT MENU DATA (NEW)
+  if (accountAvatar) {
+    accountAvatar.src = user.photoURL || "imagefiles/default-avatar.png";
+  }
+
+  if (accountName) {
+    accountName.textContent = user.displayName || "User";
+  }
+
+  if (accountEmail) {
+    accountEmail.textContent = user.email || "";
+  }
+});
+
 import {
   GoogleAuthProvider,
   signInWithPopup
@@ -299,4 +367,74 @@ window.signUp = async function () {
       errorBox.textContent = err.message;
     }
   }
+};
+
+//acount menu log-out
+const accountLogout = document.getElementById("accountLogout");
+
+if (accountLogout) {
+  accountLogout.addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "index.html";
+  });
+}
+
+await updateProfile(userCredential.user, {
+  displayName: name
+});
+
+await userCredential.user.reload(); // 🔥 ensures displayName is available
+
+const mobileLogin = document.getElementById("mobileLogin");
+
+onAuthStateChanged(auth, (user) => {
+
+  if (!mobileLogin) return;
+
+  if (user) {
+    mobileLogin.textContent = user.displayName || "Account";
+    mobileLogin.href = "profile.html";
+  } else {
+    mobileLogin.textContent = "Sign In";
+    mobileLogin.href = "login.html";
+  }
+});
+
+window.toggleMenu = function () {
+  document.getElementById("accountMenu")?.classList.remove("open");
+  document.getElementById("sideMenu")?.classList.toggle("open");
+};
+
+window.openAccountMenu = function () {
+  document.getElementById("sideMenu")?.classList.remove("open");
+  document.getElementById("accountMenu")?.classList.add("open");
+};
+
+window.toggleMoreMenu = function () {
+  const menu = document.getElementById("moreMenu");
+  if (!menu) return;
+
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+};
+
+window.toggleMoreMenu = function () {
+  const menu = document.getElementById("moreMenu");
+  if (!menu) return;
+
+  menu.style.display =
+    menu.style.display === "block" ? "none" : "block";
+};
+window.toggleMobileMenu = function () {
+  document.getElementById("mobileMenu").classList.toggle("open");
+  document.getElementById("desktopMenu").classList.remove("open");
+};
+
+window.toggleDesktopMenu = function () {
+  document.getElementById("desktopMenu").classList.toggle("open");
+  document.getElementById("mobileMenu").classList.remove("open");
+};
+
+window.closeMenus = function () {
+  document.getElementById("mobileMenu")?.classList.remove("open");
+  document.getElementById("desktopMenu")?.classList.remove("open");
 };

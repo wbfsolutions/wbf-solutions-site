@@ -23,80 +23,76 @@
 
   <!-- CENTER -->
   <div class="nav-center">
+
     <a href="index.html">Home</a>
     <a href="portfolio.html">Portfolio</a>
     <a href="store.html">Store</a>
     <a href="contact.html">Contact</a>
 
-<div class="nav-search">
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Search..."
-    autocomplete="off"
-  />
-
-  <button onclick="runSearch()">⌕</button>
-
-  <div id="searchResults" class="search-results"></div>
-</div>
-  </div>
-
-<!-- RIGHT -->
-<div class="nav-right">
-
-  <div class="auth-links">
-
-    <!-- USER AVATAR (hidden by default) -->
-    <img
-      id="userAvatar"
-      src="imagefiles/default-avatar.png"
-      alt="User"
-      class="user-avatar"
-      style="display:none; cursor:pointer;"
-    >
-
-    <a href="login.html" id="loginLink">Sign In</a>
-    <a href="signup.html" id="signupLink">Sign Up</a>
-    
+    <div class="nav-search">
+      <input type="text" id="searchInput" placeholder="Search..." autocomplete="off"/>
+      <button onclick="runSearch()">⌕</button>
+      <div id="searchResults" class="search-results"></div>
+    </div>
 
   </div>
 
-  <div class="menu-toggle" onclick="toggleMenu()">⋮</div>
+  <!-- RIGHT -->
+  <div class="nav-right">
 
-</div>
+    <div class="auth-links">
+
+      <img
+        id="userAvatar"
+        src="imagefiles/default-avatar.png"
+        alt="User"
+        class="user-avatar"
+        style="display:none; cursor:pointer;"
+      >
+
+      <a href="login.html" id="loginLink">Sign In</a>
+      <a href="signup.html" id="signupLink">Sign Up</a>
+
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span class="icon-desktop">⋮</span>
+      <span class="icon-mobile">☰</span>
+    </div>
+
+  </div>
 
 </nav>
 
 <!-- HERO -->
 <section class="hero">
 
-  <!-- LEFT CONTENT -->
   <div class="hero-text">
     <h1>3D Models for Products, Parts & Manufacturing</h1>
-    <p><p>
-3D models for products, parts, and prototypes used in manufacturing, testing, and visualization. Deliverables are structured for practical use in production and development workflows.
-</p></p>
+
+    <p>
+      3D models for products, parts, and prototypes used in manufacturing, testing, and visualization.
+      Deliverables are structured for practical use in production and development workflows.
+    </p>
 
     <div class="hero-buttons">
-  <a href="portfolio.html" class="btn primary">View Portfolio</a>
-  <a href="store.html" class="btn secondary">Browse Store</a>
-</div>
+      <a href="quote.html" class="btn primary">Get a Quote</a>
+      <a href="store.html" class="btn secondary">Browse Store</a>
+    </div>
   </div>
 
-  <!-- RIGHT SCROLLING IMAGE STRIP -->
   <div class="hero-visual">
 
-  <img class="hero-slide active" src="imagefiles/WhatsApp Image 2025-11-16 at 19.27.53_8e1aeee5.jpg" alt="">
-  <img class="hero-slide" src="imagefiles/WhatsApp Image 2025-11-16 at 19.26.13_8c8b2bf4.jpg" alt="">
-  <img class="hero-slide" src="imagefiles/IMG-20251101-WA0009.jpg"">
-  <img class="hero-slide" src="imagefiles/Horse Emblem.png" alt="">
+    <img class="hero-slide active" src="imagefiles/WhatsApp Image 2025-11-16 at 19.27.53_8e1aeee5.jpg" alt="">
+    <img class="hero-slide" src="imagefiles/WhatsApp Image 2025-11-16 at 19.26.13_8c8b2bf4.jpg" alt="">
+    <img class="hero-slide" src="imagefiles/IMG-20251101-WA0009.jpg" alt="">
+    <img class="hero-slide" src="imagefiles/Horse Emblem.png" alt="">
 
-</div>
+  </div>
 
 </section>
 
-<!-- VALUE SECTION -->
+<!-- VALUE -->
 <section class="section">
 
   <h2>Why choose us for your next project?</h2>
@@ -159,22 +155,18 @@
   <h2>Have a project in mind?</h2>
   <p>Send the details and we’ll turn it into a workable design you can actually use.</p>
 
-  <br>
-
   <a href="contact.html" class="btn primary">Get in touch</a>
 
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-
   <p>© 2023 WBF Solutions & Design</p>
-
 </footer>
 
 <script type="module" src="script.js"></script>
 
-<!-- SIDE MENU -->
+<!-- SIDE MENU (FIXED - NO PAGE LINKS INSIDE) -->
 <div id="sideMenu" class="side-menu">
 
   <div class="side-header">
@@ -184,23 +176,26 @@
 
   <div class="side-content">
 
-    <div class="menu-section">
-      <h4>Account</h4>
-      <a href="profile.html">User Account</a>
-      <a href="#" id="sideLogout">Logout</a>
+    <!-- MOBILE ONLY NAV (we hide/show via CSS) -->
+    <div class="menu-section nav-links">
+      <h4>Main</h4>
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="store.html">Store</a>
+      <a href="contact.html">Contact</a>
     </div>
 
-  <div class="menu-section">
-  <h4>Legal</h4>
-  <a href="privacy.html">Privacy Policy</a>
-  <a href="terms.html">Terms & Conditions</a>
-</div>
+    <div class="menu-section">
+      <h4>Legal</h4>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+    </div>
 
-<div class="menu-section">
-  <h4>Site</h4>
-  <a href="about.html">About Us</a>
-  <a href="contact.html">Contact</a>
-</div>
+    <div class="menu-section">
+      <h4>WBF Solutions</h4>
+      <a href="about.html">About Us</a>
+      <a href="mission.html">Our Mission</a>
+    </div>
 
     <div class="menu-section">
       <h4>Social</h4>
@@ -208,28 +203,42 @@
       <a href="https://www.facebook.com/share/1EL3WsSLWQ/" target="_blank">Facebook</a>
     </div>
 
-  </div>
+    <div class="menu-section">
+      <h4>Need Help</h4>
+      <a href="contact.html">Contact Us</a>
+      <a href="qanda.html">Q&A</a>
+    </div>
 
+  </div>
+</div>
 </div>
 
+<!-- ACCOUNT MENU -->
 <div id="accountOverlay" class="overlay"></div>
 
 <div id="accountMenu" class="side-menu account-menu">
+
   <div class="side-header">
     <h3>Account</h3>
   </div>
 
   <div class="account-info">
-    <img id="accountAvatar" class="user-avatar" />
-    <p id="accountName"></p>
+    <img id="accountAvatar" class="user-avatar" src="imagefiles/default-avatar.png"/>
+    <p id="accountName">Guest</p>
     <p id="accountEmail"></p>
   </div>
 
   <div class="menu-section">
     <a href="profile.html">Profile</a>
     <a href="settings.html">Settings</a>
+    <a href="orders.html">Orders</a>
+    <a href="downloads.html">Downloads</a>
+  </div>
+
+  <div class="menu-section">
     <a id="accountLogout">Logout</a>
   </div>
+
 </div>
 
 <!-- OVERLAY -->
