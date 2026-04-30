@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WBF Solutions & Design</title>
 
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
 
-<body class="auth-page">
+<body class="home-page">
 
 <!--Navbar-->
 <nav class="navbar">
@@ -24,8 +25,8 @@
   <div class="nav-center">
 
     <a href="index.html">Home</a>
-    <a href="new.html">Portfolio</a>
-    <a href="new.html">Store</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="store.html">Store</a>
     <a href="contact.html">Contact</a>
 
     <div class="nav-search">
@@ -63,87 +64,123 @@
 
 </nav>
 
-<!-- AUTH CONTENT -->
-<h1>Login</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="auth-card">
+<title>Coming Soon | WBF Solutions & Design</title>
 
-  <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 
-  <button onclick="login()" class="btn primary">Login</button>
+<style>
+/* =========================
+   COMING SOON PAGE STYLE
+========================= */
 
-  <p id="error" style="color:#ff6b6b; margin-top:10px;"></p>
+.coming-soon {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  <p style="margin-top:10px;">
-  <a href="#" id="forgotPassword" style="color:#6AA6FF; font-size:14px;">
-    Forgot password?
-  </a>
-</p>
+  text-align: center;
+  padding: 40px;
+}
 
-<p id="error" style="color:#ff6b6b; margin-top:10px;"></p>
-<p id="success" style="color:#4ade80; margin-top:10px;"></p>
+.coming-logo img {
+  width: 250px;
+  height: auto;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.coming-title {
+  font-size: 32px;
+  color: #F8FAFC;
+  margin-bottom: 10px;
+}
+
+.coming-text {
+  max-width: 500px;
+  font-size: 15px;
+  color: #94A3B8;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  background: rgba(79,124,255,0.15);
+  border: 1px solid rgba(79,124,255,0.4);
+  color: #6AA6FF;
+
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  text-decoration: none;
+
+  background: #4F7CFF;
+  color: white;
+
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  background: #3B66E3;
+  transform: translateY(-2px);
+}
+
+.footer-note {
+  margin-top: 40px;
+  font-size: 12px;
+  color: #64748B;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="coming-soon">
+
+  <!-- LOGO -->
+  <div class="coming-logo">
+    <img src="Logo.png" alt="WBF Solutions Logo">
+  </div>
+
+  <!-- BADGE -->
+  <div class="badge">Coming Soon</div>
+
+  <!-- TITLE -->
+  <h1 class="coming-title">This Page is Under Development</h1>
+
+  <!-- TEXT -->
+  <p class="coming-text">
+    We're currently working on this section to bring you something new and improved.
+    Features, content, or tools for this page are not ready yet — but they’re on the way.
+  </p>
+
+  <!-- BUTTON -->
+  <a href="index.html" class="btn">Return Home</a>
+
+  <!-- FOOTER NOTE -->
+  <div class="footer-note">
+    © 2026 WBF Solutions & Design
+  </div>
 
 </div>
-
-<!-- FIREBASE LOGIN LOGIC -->
-<script type="module">
-import { auth } from "./firebase.js";
-import {
-  signInWithEmailAndPassword,
-  sendEmailVerification
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-window.login = async function () {
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const errorBox = document.getElementById("error");
-
-  errorBox.textContent = "";
-
-  if (!email || !password) {
-    errorBox.textContent = "Please enter email and password.";
-    return;
-  }
-
-  try {
-
-    const userCred = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCred.user;
-
-    // 🚫 BLOCK IF NOT VERIFIED
-    if (!user.emailVerified) {
-
-      await sendEmailVerification(user);
-
-      errorBox.textContent =
-        "Email not verified. A new verification email has been sent.";
-
-      // optional: sign them out immediately
-      await auth.signOut();
-
-      return;
-    }
-
-    // ✅ ALLOW LOGIN
-    window.location.href = "index.html";
-
-  } catch (err) {
-    errorBox.textContent = err.message;
-  }
-};
-</script>
-
-<!-- ✅ GLOBAL NAVBAR + AUTH STATE SCRIPT (CRITICAL) -->
-<script type="module" src="script.js"></script>
-
-<script type="module" src="script.js"></script>
-
-<!--Footer-->
-<footer>
-  <p>© 2022 WBF Solutions & Design</p>
-</footer>
 
 <script type="module" src="script.js"></script>
 
@@ -188,7 +225,7 @@ window.login = async function () {
     <div class="menu-section">
       <h4>Need Help</h4>
       <a href="contact.html">Contact Us</a>
-      <a href="new.html">Q&A</a>
+      <a href="qanda.html">Q&A</a>
     </div>
 
   </div>
@@ -211,10 +248,10 @@ window.login = async function () {
   </div>
 
   <div class="menu-section">
-    <a href="new.html">Profile</a>
-    <a href="new.html">Settings</a>
-    <a href="new.html">Orders</a>
-    <a href="new.html">Downloads</a>
+    <a href="profile.html">Profile</a>
+    <a href="settings.html">Settings</a>
+    <a href="orders.html">Orders</a>
+    <a href="downloads.html">Downloads</a>
   </div>
 
   <div class="menu-section">

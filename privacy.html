@@ -10,7 +10,7 @@
 
 <body class="legal-page">
 
-<!-- NAVBAR -->
+<!--Navbar-->
 <nav class="navbar">
 
   <!-- LEFT -->
@@ -22,23 +22,18 @@
 
   <!-- CENTER -->
   <div class="nav-center">
+
     <a href="index.html">Home</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="store.html">Store</a>
+    <a href="new.html">Portfolio</a>
+    <a href="new.html">Store</a>
     <a href="contact.html">Contact</a>
 
     <div class="nav-search">
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Search..."
-    autocomplete="off"
-  />
+      <input type="text" id="searchInput" placeholder="Search..." autocomplete="off"/>
+      <button onclick="runSearch()">⌕</button>
+      <div id="searchResults" class="search-results"></div>
+    </div>
 
-  <button onclick="runSearch()">⌕</button>
-
-  <div id="searchResults" class="search-results"></div>
-</div>
   </div>
 
   <!-- RIGHT -->
@@ -46,21 +41,23 @@
 
     <div class="auth-links">
 
-      <!-- USER AVATAR (hidden by default) -->
-    <img
-      id="userAvatar"
-      src="imagefiles/default-avatar.png"
-      alt="User"
-      class="user-avatar"
-      style="display:none; cursor:pointer;"
-    >
+      <img
+        id="userAvatar"
+        src="imagefiles/default-avatar.png"
+        alt="User"
+        class="user-avatar"
+        style="display:none; cursor:pointer;"
+      >
 
       <a href="login.html" id="loginLink">Sign In</a>
       <a href="signup.html" id="signupLink">Sign Up</a>
 
     </div>
 
-    <div class="menu-toggle" onclick="toggleMenu()">⋮</div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span class="icon-desktop">⋮</span>
+      <span class="icon-mobile">☰</span>
+    </div>
 
   </div>
 
@@ -69,79 +66,147 @@
 <!-- CONTENT -->
 <section class="legal-container">
 
-  <h1>Privacy Policy</h1>
+<h1>Privacy Policy</h1>
 
-  <p>Last updated: 2026</p>
+<p>Last updated: April 2026</p>
 
-  <h2>1. Overview</h2>
-  <p>
-    This website is operated by WBF Solutions & Design. We are committed to protecting your privacy and handling your data responsibly.
-  </p>
+<h2>1. Overview</h2>
+<p>
+WBF Solutions & Design ("we", "our", "us") respects your privacy and is committed to protecting your personal data.
+This Privacy Policy explains how we collect, use, and store information when you use our website and services.
+</p>
 
-  <h2>2. Information We Collect</h2>
-  <p>We may collect the following personal information:</p>
-  <ul>
-    <li>Name</li>
-    <li>Email address</li>
-    <li>Account login details</li>
-    <li>Messages sent through forms</li>
-    <li>Purchase-related information</li>
-  </ul>
+<h2>2. Information We Collect</h2>
+<p>We may collect the following information:</p>
 
-  <h2>3. How We Use Your Information</h2>
-  <p>Your data is used to:</p>
-  <ul>
-    <li>Create and manage user accounts</li>
-    <li>Respond to inquiries</li>
-    <li>Provide digital products and services</li>
-    <li>Improve website functionality</li>
-  </ul>
+<ul>
+  <li>Name and email address</li>
+  <li>Account credentials (handled securely via Firebase Authentication)</li>
+  <li>Profile data (such as display name and avatar)</li>
+  <li>Messages sent through contact forms or email</li>
+  <li>Order and purchase information (processed via third-party providers)</li>
+  <li>Technical data such as IP address, browser type, and device information</li>
+</ul>
 
-  <h2>4. Third-Party Services (Gumroad)</h2>
-  <p>
-    We use third-party platforms such as Gumroad to process payments, manage digital product delivery, and handle purchases.
-  </p>
+<h2>3. How We Collect Information</h2>
+<p>
+We collect information when you:
+</p>
+<ul>
+  <li>Create an account (email/password or Google sign-in)</li>
+  <li>Log into the website</li>
+  <li>Submit forms or contact requests</li>
+  <li>Make purchases through third-party platforms</li>
+  <li>Interact with our website features</li>
+</ul>
 
-  <p>
-    When you make a purchase, your information (such as email address and payment details) may be collected and processed directly by Gumroad and its payment providers (including Stripe or PayPal).
-  </p>
+<h2>4. Authentication & Account Services</h2>
+<p>
+We use <strong>Firebase Authentication</strong> to securely manage user accounts.
+This includes email/password login and Google OAuth sign-in.
+We do not store raw passwords on our servers.
+</p>
 
-  <p>
-    We do not store or process your full payment information on our servers.
-  </p>
+<h2>5. Data Storage</h2>
+<p>
+User data is stored securely using <strong>Google Firebase (Firestore)</strong>.
+This may include your name, email, account type, and preferences.
+</p>
 
-  <p>
-    Your interaction with Gumroad is also subject to their privacy policy:
-    <br>
-    <a href="https://gumroad.com/privacy" target="_blank">Gumroad Privacy Policy</a>
-  </p>
+<h2>6. Third-Party Services</h2>
 
-  <h2>5. Data Storage & Security</h2>
-  <p>
-    Your data is securely stored using trusted services such as Firebase. We take reasonable measures to protect it from unauthorized access.
-  </p>
+<p>We use trusted third-party services to operate our platform:</p>
 
-  <h2>6. Email Communication</h2>
-  <p>
-    We may send account-related emails such as verification, password resets, and service updates. We do not send unsolicited spam.
-  </p>
+<ul>
+  <li><strong>Google Firebase</strong> – authentication, database, hosting</li>
+  <li><strong>Google OAuth</strong> – social login</li>
+  <li><strong>Gumroad</strong> – payment processing and digital product delivery</li>
+</ul>
 
-  <h2>7. Cookies</h2>
-  <p>
-    This site may use cookies to maintain login sessions and improve user experience.
-  </p>
+<p>
+These providers may collect and process your data according to their own privacy policies.
+We do not control how they process data.
+</p>
 
-  <h2>8. Your Rights</h2>
-  <p>
-    You may request access, correction, or deletion of your personal data at any time by contacting us.
-  </p>
+<p>
+Gumroad Privacy Policy:
+<br>
+<a href="https://gumroad.com/privacy" target="_blank">https://gumroad.com/privacy</a>
+</p>
 
-  <h2>9. Contact</h2>
-  <p>
-    For privacy-related inquiries:<br>
-    <strong><wbf class="solutions admin"></wbf>@gmail.com</strong>
-  </p>
+<h2>7. Payments</h2>
+<p>
+We do not store or process full payment details.
+All payments are handled securely by Gumroad and its payment processors (such as Stripe or PayPal).
+</p>
 
+<h2>8. Cookies & Local Storage</h2>
+<p>
+We use cookies and local storage to:
+</p>
+<ul>
+  <li>Maintain login sessions</li>
+  <li>Improve user experience</li>
+  <li>Store basic preferences</li>
+</ul>
+
+<h2>9. Email Communication</h2>
+<p>
+We may send emails related to:
+</p>
+<ul>
+  <li>Account verification</li>
+  <li>Password resets</li>
+  <li>Important service updates</li>
+</ul>
+
+<p>We do not send unsolicited spam or sell your email address.</p>
+
+<h2>10. Data Security</h2>
+<p>
+We take reasonable technical and organizational measures to protect your data.
+However, no system is 100% secure and we cannot guarantee absolute security.
+</p>
+
+<h2>11. Your Rights</h2>
+<p>
+Depending on your location, you may have the right to:
+</p>
+<ul>
+  <li>Access your personal data</li>
+  <li>Request corrections</li>
+  <li>Request deletion of your account and data</li>
+</ul>
+
+<p>
+To make a request, contact us using the details below.
+</p>
+
+<h2>12. Data Retention</h2>
+<p>
+We retain account data as long as your account is active or as required to provide services.
+You may request deletion at any time.
+</p>
+
+<h2>13. Children’s Privacy</h2>
+<p>
+This website is not intended for children under 13.
+We do not knowingly collect data from children.
+</p>
+
+<h2>14. Changes to This Policy</h2>
+<p>
+We may update this Privacy Policy from time to time. Changes will be posted on this page.
+</p>
+
+<h2>15. Contact</h2>
+<p>
+For privacy-related questions:
+<br><br>
+<strong>wbf.solutions.admin@gmail.com</strong>
+</p>
+
+</section>
 </section>
 
 <!-- FOOTER -->
@@ -153,6 +218,14 @@
 
 <script type="module" src="script.js"></script>
 
+<!--Footer-->
+<footer>
+  <p>© 2022 WBF Solutions & Design</p>
+</footer>
+
+<script type="module" src="script.js"></script>
+
+<!-- Menus -->
 <!-- SIDE MENU -->
 <div id="sideMenu" class="side-menu">
 
@@ -163,23 +236,26 @@
 
   <div class="side-content">
 
-    <div class="menu-section">
-      <h4>Account</h4>
-      <a href="profile.html">User Account</a>
-      <a href="#" id="sideLogout">Logout</a>
+    <!-- MOBILE ONLY NAV (we hide/show via CSS) -->
+    <div class="menu-section nav-links">
+      <h4>Main</h4>
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="store.html">Store</a>
+      <a href="contact.html">Contact</a>
     </div>
 
-  <div class="menu-section">
-  <h4>Legal</h4>
-  <a href="privacy.html">Privacy Policy</a>
-  <a href="terms.html">Terms & Conditions</a>
-</div>
+    <div class="menu-section">
+      <h4>Legal</h4>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+    </div>
 
-<div class="menu-section">
-  <h4>Site</h4>
-  <a href="about.html">About Us</a>
-  <a href="contact.html">Contact</a>
-</div>
+    <div class="menu-section">
+      <h4>WBF Solutions</h4>
+      <a href="about.html">About Us</a>
+      <a href="mission.html">Our Mission</a>
+    </div>
 
     <div class="menu-section">
       <h4>Social</h4>
@@ -187,12 +263,46 @@
       <a href="https://www.facebook.com/share/1EL3WsSLWQ/" target="_blank">Facebook</a>
     </div>
 
+    <div class="menu-section">
+      <h4>Need Help</h4>
+      <a href="contact.html">Contact Us</a>
+      <a href="new.html">Q&A</a>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ACCOUNT MENU -->
+<div id="accountOverlay" class="overlay"></div>
+
+<div id="accountMenu" class="side-menu account-menu">
+
+  <div class="side-header">
+    <h3>Account</h3>
+  </div>
+
+  <div class="account-info">
+    <img id="accountAvatar" class="user-avatar" src="imagefiles/default-avatar.png"/>
+    <p id="accountName">Guest</p>
+    <p id="accountEmail"></p>
+  </div>
+
+  <div class="menu-section">
+    <a href="new.html">Profile</a>
+    <a href="new.html">Settings</a>
+    <a href="new.html">Orders</a>
+    <a href="new.html">Downloads</a>
+  </div>
+
+  <div class="menu-section">
+    <a id="accountLogout">Logout</a>
   </div>
 
 </div>
 
 <!-- OVERLAY -->
-<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+<div class="overlay" onclick="closeMenus()"></div>
 
 </body>
 </html>

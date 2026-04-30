@@ -10,7 +10,7 @@
 
 <body class="legal-page">
 
-<!-- NAVBAR -->
+<!--Navbar-->
 <nav class="navbar">
 
   <!-- LEFT -->
@@ -22,23 +22,18 @@
 
   <!-- CENTER -->
   <div class="nav-center">
+
     <a href="index.html">Home</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="store.html">Store</a>
+    <a href="new.html">Portfolio</a>
+    <a href="new.html">Store</a>
     <a href="contact.html">Contact</a>
 
     <div class="nav-search">
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Search..."
-    autocomplete="off"
-  />
+      <input type="text" id="searchInput" placeholder="Search..." autocomplete="off"/>
+      <button onclick="runSearch()">⌕</button>
+      <div id="searchResults" class="search-results"></div>
+    </div>
 
-  <button onclick="runSearch()">⌕</button>
-
-  <div id="searchResults" class="search-results"></div>
-</div>
   </div>
 
   <!-- RIGHT -->
@@ -46,21 +41,23 @@
 
     <div class="auth-links">
 
-      <!-- USER AVATAR (hidden by default) -->
-    <img
-      id="userAvatar"
-      src="imagefiles/default-avatar.png"
-      alt="User"
-      class="user-avatar"
-      style="display:none; cursor:pointer;"
-    >
+      <img
+        id="userAvatar"
+        src="imagefiles/default-avatar.png"
+        alt="User"
+        class="user-avatar"
+        style="display:none; cursor:pointer;"
+      >
 
       <a href="login.html" id="loginLink">Sign In</a>
       <a href="signup.html" id="signupLink">Sign Up</a>
 
     </div>
 
-    <div class="menu-toggle" onclick="toggleMenu()">⋮</div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span class="icon-desktop">⋮</span>
+      <span class="icon-mobile">☰</span>
+    </div>
 
   </div>
 
@@ -75,18 +72,19 @@
 
   <h2>1. Overview</h2>
   <p>
-    These Terms of Use govern all services, digital products, and custom work provided by WBF Solutions & Design.
+    These Terms & Conditions govern all services, digital products, and custom work provided by WBF Solutions & Design.
     By using this website or engaging our services, you agree to these terms.
   </p>
 
   <h2>2. Services</h2>
   <p>
-    We provide CAD design, 3D modelling, digital assets, and related design services. All deliverables are defined per project scope agreed with the client before work begins.
+    We provide digital design services including CAD design, 3D modelling, visualization, and digital asset creation.
+    All work is delivered based on an agreed project scope before commencement.
   </p>
 
   <h2>3. Project Scope</h2>
   <p>
-    Each project includes only what is explicitly agreed upon before work starts. Any additional requests outside the original scope may incur additional charges.
+    Only work explicitly included in the agreed scope is provided. Any additional requests outside the original scope may incur additional charges and extended timelines.
   </p>
 
   <h2>4. Revisions</h2>
@@ -94,64 +92,144 @@
     Unless otherwise agreed, projects include a limited number of revision rounds. Additional revisions will be billed separately.
   </p>
 
-  <h2>5. Payments</h2>
+  <h2>5. Payments & Deposits</h2>
+
   <p>
-    Payment terms are agreed per project. Work may require a deposit before starting. All payments are non-refundable once work has commenced unless otherwise stated.
+    All pricing and payments are structured to ensure fairness, project security, and efficient delivery of services.
+  </p>
+
+  <h3>5.1 Payment Structure</h3>
+  <ul>
+    <li><strong>Jobs under $100:</strong> No deposit required. Full payment must be made before delivery of final files or completed work.</li>
+    <li><strong>Jobs from $100 – $500:</strong> A 30% non-refundable deposit is required to begin work. The remaining 70% must be paid before delivery.</li>
+    <li><strong>Jobs over $500:</strong> A 50% non-refundable deposit is required to begin work. The remaining 50% must be paid before delivery.</li>
+  </ul>
+
+  <h3>5.2 Work Commencement</h3>
+  <p>
+    No work will begin until the required payment or deposit conditions are met and confirmed.
+  </p>
+
+  <h3>5.3 Non-Refundable Deposits</h3>
+  <p>
+    All deposits are strictly non-refundable once work has started, as they cover time allocation, planning, and initial production stages.
+  </p>
+
+  <h3>5.4 Delivery Policy</h3>
+  <p>
+    Final files, deliverables, or completed work will only be released once full payment has been received.
+  </p>
+
+  <h3>5.5 Late or Missing Payments</h3>
+  <p>
+    Failure to complete payment may result in suspension of work, withholding of deliverables, or cancellation of the project without refund of deposit.
+  </p>
+
+  <h3>5.6 Pricing Changes</h3>
+  <p>
+    Any changes to project scope, requirements, or complexity may result in additional charges, which will be communicated before continuation of work.
   </p>
 
   <h2>6. Delivery</h2>
   <p>
-    Deliverables are provided in agreed formats (such as STL, STEP, OBJ, or project-specific formats). Delivery timelines are estimates unless explicitly guaranteed.
+    Deliverables are provided in agreed formats (such as STL, STEP, OBJ, or project-specific formats).
+    Delivery timelines are estimates unless explicitly guaranteed.
   </p>
 
-  <h2>7. Ownership & Usage Rights</h2>
-  <p>
-    Upon full payment, clients receive the agreed usage rights for delivered work.
-  </p>
+  <h2>7. Intellectual Property Rights</h2>
 
+  <h3>7.1 Custom Work (Client Commissioned Projects)</h3>
   <p>
-    Unless otherwise agreed in writing, WBF Solutions & Design retains the right to showcase completed work in portfolios, promotional material, and case studies.
-  </p>
-
-  <h2>8. Digital Products (Gumroad)</h2>
-  <p>
-    Some products are sold via third-party platforms such as Gumroad. These platforms handle payment processing, downloads, and delivery.
+    For custom commissioned work, the client receives full ownership of the final delivered design upon full payment, unless otherwise agreed in writing before the project begins.
   </p>
 
   <p>
-    Purchases made through Gumroad are also subject to their own terms and policies.
+    This includes the right to use, modify, and apply the delivered work for personal or commercial purposes within the agreed project scope.
   </p>
 
-  <h2>9. Prohibited Use</h2>
   <p>
-    Clients may not resell, redistribute, or claim authorship of delivered work unless explicitly permitted in writing.
+    WBF Solutions & Design retains the right to showcase completed work in portfolios, marketing, and case studies unless explicitly restricted in writing.
   </p>
 
-  <h2>10. Limitation of Liability</h2>
+  <h3>7.2 Store Products (Pre-Made Digital Products)</h3>
   <p>
-    We are not liable for any misuse of designs, manufacturing errors, or third-party implementation of delivered files.
+    All store products are provided under a <strong>personal use license only</strong> by default.
   </p>
 
-  <h2>11. Communication</h2>
   <p>
-    All project communication must remain professional and relevant to the agreed scope of work.
+    Personal use means the buyer may use the product for individual, non-commercial purposes only. Reselling, redistribution, or claiming ownership is strictly prohibited.
   </p>
 
-  <h2>12. Changes to Terms</h2>
+  <h3>7.3 Commercial & Extended Licenses</h3>
   <p>
-    These Terms may be updated at any time. Continued use of services implies acceptance of updated terms.
+    If a client wishes to use store products for commercial use, resale, redistribution, or integration into their own products or services,
+    they must purchase the appropriate license (user license or seller/commercial license where applicable).
   </p>
 
-  <h2>13. Contact</h2>
   <p>
-    For questions regarding these Terms:<br>
-    <strong>wbf.solutions.admin@gmail.com</strong>
+    Commercial use is not permitted unless explicitly granted through a valid license purchase or written agreement.
+  </p>
+
+  <h3>7.4 Copyright Protection</h3>
+  <p>
+    All designs, assets, and digital products remain the intellectual property of WBF Solutions & Design until ownership or licensing is properly granted as outlined above.
+  </p>
+
+  <h2>8. Digital Products</h2>
+  <p>
+    Some products are sold via third-party platforms such as Gumroad. These platforms handle payment processing and delivery.
+    Purchases are subject to their own terms and policies.
+  </p>
+
+  <p>
+    All digital product sales are final and non-refundable unless required by law.
+  </p>
+
+  <h2>9. Refund Policy</h2>
+  <ul>
+    <li>Refunds are not provided once work has started.</li>
+    <li>Deposits are strictly non-refundable.</li>
+    <li>Refunds are only considered if no work has commenced.</li>
+  </ul>
+
+  <h2>10. Prohibited Use</h2>
+  <p>
+    Clients may not resell, redistribute, or claim authorship of delivered work without permission or a valid license.
+  </p>
+
+  <h2>11. Liability Disclaimer</h2>
+  <p>
+    We are not responsible for misuse of files, manufacturing errors, third-party modifications, or indirect damages resulting from the use of delivered work.
+  </p>
+
+  <h2>12. Communication</h2>
+  <p>
+    All communication must remain professional and relevant to the project scope. We reserve the right to refuse service for abusive or inappropriate behavior.
+  </p>
+
+  <h2>13. Changes to Terms</h2>
+  <p>
+    These Terms may be updated at any time. Continued use of services constitutes acceptance of updated Terms.
+  </p>
+
+  <h2>14. Contact</h2>
+  <p>
+    For legal or service inquiries:<br>
+    <strong>wbf.solutions.support@gmail.com</strong>
   </p>
 
 </section>
 
 <script type="module" src="script.js"></script>
 
+<!--Footer-->
+<footer>
+  <p>© 2022 WBF Solutions & Design</p>
+</footer>
+
+<script type="module" src="script.js"></script>
+
+<!-- Menus -->
 <!-- SIDE MENU -->
 <div id="sideMenu" class="side-menu">
 
@@ -162,23 +240,26 @@
 
   <div class="side-content">
 
-    <div class="menu-section">
-      <h4>Account</h4>
-      <a href="profile.html">User Account</a>
-      <a href="#" id="sideLogout">Logout</a>
+    <!-- MOBILE ONLY NAV (we hide/show via CSS) -->
+    <div class="menu-section nav-links">
+      <h4>Main</h4>
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="store.html">Store</a>
+      <a href="contact.html">Contact</a>
     </div>
 
-  <div class="menu-section">
-  <h4>Legal</h4>
-  <a href="privacy.html">Privacy Policy</a>
-  <a href="terms.html">Terms & Conditions</a>
-</div>
+    <div class="menu-section">
+      <h4>Legal</h4>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+    </div>
 
-<div class="menu-section">
-  <h4>Site</h4>
-  <a href="about.html">About Us</a>
-  <a href="contact.html">Contact</a>
-</div>
+    <div class="menu-section">
+      <h4>WBF Solutions</h4>
+      <a href="about.html">About Us</a>
+      <a href="mission.html">Our Mission</a>
+    </div>
 
     <div class="menu-section">
       <h4>Social</h4>
@@ -186,19 +267,46 @@
       <a href="https://www.facebook.com/share/1EL3WsSLWQ/" target="_blank">Facebook</a>
     </div>
 
+    <div class="menu-section">
+      <h4>Need Help</h4>
+      <a href="contact.html">Contact Us</a>
+      <a href="new.html">Q&A</a>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ACCOUNT MENU -->
+<div id="accountOverlay" class="overlay"></div>
+
+<div id="accountMenu" class="side-menu account-menu">
+
+  <div class="side-header">
+    <h3>Account</h3>
+  </div>
+
+  <div class="account-info">
+    <img id="accountAvatar" class="user-avatar" src="imagefiles/default-avatar.png"/>
+    <p id="accountName">Guest</p>
+    <p id="accountEmail"></p>
+  </div>
+
+  <div class="menu-section">
+    <a href="new.html">Profile</a>
+    <a href="new.html">Settings</a>
+    <a href="new.html">Orders</a>
+    <a href="new.html">Downloads</a>
+  </div>
+
+  <div class="menu-section">
+    <a id="accountLogout">Logout</a>
   </div>
 
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-
-  <p>© 2023 WBF Solutions & Design</p>
-
-</footer>
-
 <!-- OVERLAY -->
-<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+<div class="overlay" onclick="closeMenus()"></div>
 
 </body>
 </html>

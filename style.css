@@ -955,3 +955,184 @@ canvas {
     display: block;
   }
 }
+
+/* =========================================================
+   COMING SOON LOGO (CLEAN FIX)*/
+
+.coming-logo img {
+  width: 250px;
+  height: auto;
+  margin-bottom: 25px;
+  opacity: 0.95;
+
+  /* glow effect */
+  filter: drop-shadow(0 0 10px rgba(79,124,255,0.35));
+
+  /* animation */
+  animation: logoPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(79,124,255,0.25));
+  }
+
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 18px rgba(79,124,255,0.55));
+  }
+
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(79,124,255,0.25));
+  }
+}
+
+/* =========================================
+   FORM INPUT CONSISTENCY FIX
+========================================= */
+
+.auth-card input,
+.auth-card textarea {
+  width: 100%;
+  padding: 12px;
+
+  border-radius: 8px;
+  border: 1px solid #1F2A44;
+
+  background: #0E1626;
+  color: #F8FAFC;
+
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+
+  outline: none;
+  transition: 0.2s ease;
+}
+
+/* focus state */
+.auth-card input:focus,
+.auth-card textarea:focus {
+  border-color: #4F7CFF;
+  box-shadow: 0 0 0 3px rgba(79,124,255,0.15);
+}
+
+/* textarea behavior */
+.auth-card textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* =========================================
+   FORM SPACING FIX
+========================================= */
+
+.auth-card h2 {
+  font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  text-align: left;
+  color: #CBD5E1;
+}
+
+.auth-card input,
+.auth-card textarea {
+  margin-bottom: 10px;
+}
+
+/* =========================================
+   FORM CENTERING FIX
+========================================= */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+/* =========================================
+   FOOTER FIX
+========================================= */
+
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid #1F2A44;
+  color: #64748B;
+}
+
+/* =========================================
+   FILE UPLOAD STYLING
+========================================= */
+
+.form-group {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #CBD5E1;
+  margin-bottom: 6px;
+}
+
+/* file input */
+.form-group input[type="file"] {
+  width: 100%;
+  padding: 10px;
+
+  border-radius: 8px;
+  border: 1px solid #1F2A44;
+
+  background: #0E1626;
+  color: #94A3B8;
+
+  cursor: pointer;
+}
+
+/* hint text */
+.form-hint {
+  font-size: 12px;
+  color: #64748B;
+  margin-top: 4px;
+}
+
+/* Hide default file input appearance */
+input[type="file"] {
+  color: transparent;
+}
+
+/* Style the built-in button (webkit browsers) */
+input[type="file"]::file-selector-button {
+  background: #4F7CFF;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+/* Hover state */
+input[type="file"]::file-selector-button:hover {
+  background: #3b63d6;
+}
+
+.success-message {
+  color: #4F7CFF;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}

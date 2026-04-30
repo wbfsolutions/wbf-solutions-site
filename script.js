@@ -1,4 +1,21 @@
-import { auth } from "./firebase.js";
+import { app } from "./firebase.js"; // if not already exported
+
+const storage = getStorage(app);
+
+import {
+  collection,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";import { auth } from "./firebase.js";
+
 import {
   onAuthStateChanged,
   signOut,
@@ -9,6 +26,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import { getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import {
+  collection
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 onAuthStateChanged(auth, async (user) => {
 
@@ -379,12 +400,6 @@ if (accountLogout) {
   });
 }
 
-await updateProfile(userCredential.user, {
-  displayName: name
-});
-
-await userCredential.user.reload(); // 🔥 ensures displayName is available
-
 const mobileLogin = document.getElementById("mobileLogin");
 
 onAuthStateChanged(auth, (user) => {
@@ -438,3 +453,127 @@ window.closeMenus = function () {
   document.getElementById("mobileMenu")?.classList.remove("open");
   document.getElementById("desktopMenu")?.classList.remove("open");
 };
+
+/* =========================================================
+   📩 QUOTE FORM (FIRESTORE + IMAGE UPLOAD)
+========================================================= */
+/* =========================================================
+   📩 QUOTE FORM (FIRESTORE + IMAGE UPLOAD)
+========================================================= */
+
+import { db, app } from "./firebase.js";
+
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+const storage = getStorage(app);
+
+const quoteForm = document.getElementById("quoteForm");
+
+if (quoteForm) {
+
+  quoteForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    console.log("FORM SUBMIT TRIGGERED");
+
+    const message = document.getElementById("formMessage");
+    if (!message) return;
+
+    message.textContent = "";
+
+    try {
+
+      // 🔹 FILE INPUT (CORRECT ID)
+      const fileInput = document.getElementById("projectImages");
+      const files = fileInput?.files;
+
+      // 🔹 FORM DATA
+      const data = {
+        name: document.getElementById("name")?.value.trim(),
+        email: document.getElementById("email")?.value.trim(),
+        projectTitle: document.getElementById("projectTitle")?.value.trim(),
+        description: document.getElementById("description")?.value.trim(),
+        dimensions: document.getElementById("dimensions")?.value.trim(),
+        materials: document.getElementById("materials")?.value.trim(),
+        tolerances: document.getElementById("tolerances")?.value.trim(),
+        deadline: document.getElementById("deadline")?.value.trim(),
+        budget: document.getElementById("budget")?.value.trim(),
+        notes: document.getElementById("notes")?.value.trim(),
+        createdAt: serverTimestamp(),
+        status: "new",
+        fileURLs: []
+      };
+
+      console.log("DATA:", data);
+
+      // 🔹 VALIDATION
+      if (!data.name || !data.email || !data.projectTitle || !data.description) {
+        message.style.color = "#ff6b6b";
+        message.textContent = "Please fill in all required fields.";
+        return;
+      }
+
+      message.style.color = "#94A3B8";
+      message.textContent = "Uploading files...";
+
+      // 🔥 FILE UPLOAD
+      if (files && files.length > 0) {
+
+        for (let i = 0; i < files.length; i++) {
+
+          const file = files[i];
+
+          if (!file.type.startsWith("image/")) continue;
+
+          const storageRef = ref(storage, `quotes/${Date.now()}_${file.name}`);
+
+          const snapshot = await uploadBytes(storageRef, file);
+          const url = await getDownloadURL(snapshot.ref);
+
+          data.fileURLs.push(url);
+        }
+      }
+
+      message.textContent = "Submitting request...";
+
+      // 🔥 SAVE TO FIRESTORE
+      await addDoc(collection(db, "quotes"), data);
+
+      // ✅ SUCCESS
+      message.style.color = "#4F7CFF";
+      message.textContent = "Request sent successfully.";
+
+      quoteForm.reset();
+
+      // 🔥 AUTO DISAPPEAR
+      setTimeout(() => {
+        message.style.opacity = "0";
+
+        setTimeout(() => {
+          message.textContent = "";
+          message.style.opacity = "1";
+        }, 400);
+
+      }, 3000);
+
+    } catch (err) {
+      console.error("QUOTE ERROR:", err);
+
+      message.style.color = "#ff6b6b";
+      message.textContent = "Error: " + err.message;
+    }
+
+  });
+
+}

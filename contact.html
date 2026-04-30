@@ -8,7 +8,7 @@
 
 <body class="contact-page">
 
-<!-- NAVBAR -->
+<!--Navbar-->
 <nav class="navbar">
 
   <!-- LEFT -->
@@ -20,23 +20,18 @@
 
   <!-- CENTER -->
   <div class="nav-center">
+
     <a href="index.html">Home</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="store.html">Store</a>
+    <a href="new.html">Portfolio</a>
+    <a href="new.html">Store</a>
     <a href="contact.html">Contact</a>
 
     <div class="nav-search">
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Search..."
-    autocomplete="off"
-  />
+      <input type="text" id="searchInput" placeholder="Search..." autocomplete="off"/>
+      <button onclick="runSearch()">⌕</button>
+      <div id="searchResults" class="search-results"></div>
+    </div>
 
-  <button onclick="runSearch()">⌕</button>
-
-  <div id="searchResults" class="search-results"></div>
-</div>
   </div>
 
   <!-- RIGHT -->
@@ -44,21 +39,23 @@
 
     <div class="auth-links">
 
-      <!-- USER AVATAR (hidden by default) -->
-    <img
-      id="userAvatar"
-      src="imagefiles/default-avatar.png"
-      alt="User"
-      class="user-avatar"
-      style="display:none; cursor:pointer;"
-    >
+      <img
+        id="userAvatar"
+        src="imagefiles/default-avatar.png"
+        alt="User"
+        class="user-avatar"
+        style="display:none; cursor:pointer;"
+      >
 
       <a href="login.html" id="loginLink">Sign In</a>
       <a href="signup.html" id="signupLink">Sign Up</a>
 
     </div>
 
-    <div class="menu-toggle" onclick="toggleMenu()">⋮</div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span class="icon-desktop">⋮</span>
+      <span class="icon-mobile">☰</span>
+    </div>
 
   </div>
 
@@ -125,7 +122,15 @@
 <!-- FIREBASE SCRIPT -->
 <script type="module" src="script.js"></script>
 
-<!-- SIDE MENU (ONLY ONE INSTANCE) -->
+<!--Footer-->
+<footer>
+  <p>© 2022 WBF Solutions & Design</p>
+</footer>
+
+<script type="module" src="script.js"></script>
+
+<!-- Menus -->
+<!-- SIDE MENU -->
 <div id="sideMenu" class="side-menu">
 
   <div class="side-header">
@@ -135,43 +140,73 @@
 
   <div class="side-content">
 
-    <div class="menu-section">
-      <h4>Account</h4>
-      <a href="profile.html">User Account</a>
-      <a href="#" id="sideLogout">Logout</a>
+    <!-- MOBILE ONLY NAV (we hide/show via CSS) -->
+    <div class="menu-section nav-links">
+      <h4>Main</h4>
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="store.html">Store</a>
+      <a href="contact.html">Contact</a>
     </div>
 
     <div class="menu-section">
-  <h4>Legal</h4>
-  <a href="privacy.html">Privacy Policy</a>
-  <a href="terms.html">Terms & Conditions</a>
-</div>
+      <h4>Legal</h4>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+    </div>
 
-<div class="menu-section">
-  <h4>Site</h4>
-  <a href="about.html">About Us</a>
-  <a href="contact.html">Contact</a>
-</div>
+    <div class="menu-section">
+      <h4>WBF Solutions</h4>
+      <a href="about.html">About Us</a>
+      <a href="mission.html">Our Mission</a>
+    </div>
 
     <div class="menu-section">
       <h4>Social</h4>
-      <a href="https://instagram.com" target="_blank">Instagram</a>
-      <a href="https://facebook.com" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/wbf_solutions_design/" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/share/1EL3WsSLWQ/" target="_blank">Facebook</a>
     </div>
 
+    <div class="menu-section">
+      <h4>Need Help</h4>
+      <a href="contact.html">Contact Us</a>
+      <a href="new.html">Q&A</a>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ACCOUNT MENU -->
+<div id="accountOverlay" class="overlay"></div>
+
+<div id="accountMenu" class="side-menu account-menu">
+
+  <div class="side-header">
+    <h3>Account</h3>
+  </div>
+
+  <div class="account-info">
+    <img id="accountAvatar" class="user-avatar" src="imagefiles/default-avatar.png"/>
+    <p id="accountName">Guest</p>
+    <p id="accountEmail"></p>
+  </div>
+
+  <div class="menu-section">
+    <a href="new.html">Profile</a>
+    <a href="new.html">Settings</a>
+    <a href="new.html">Orders</a>
+    <a href="new.html">Downloads</a>
+  </div>
+
+  <div class="menu-section">
+    <a id="accountLogout">Logout</a>
   </div>
 
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-
-  <p>© 2023 WBF Solutions & Design</p>
-
-</footer>
-
 <!-- OVERLAY -->
-<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+<div class="overlay" onclick="closeMenus()"></div>
 
 </body>
 </html>

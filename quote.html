@@ -64,100 +64,114 @@
 
 </nav>
 
-<!--Page-->
-
-<!-- HERO -->
-<section class="hero">
-
-  <div class="hero-text">
-    <h1>3D Models for Products, Parts & Manufacturing</h1>
-
-    <p>
-      3D models for products, parts, and prototypes used in manufacturing, testing, and visualization.
-      Deliverables are structured for practical use in production and development workflows.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="quote.html" class="btn primary">Get a Quote</a>
-      <a href="store.html" class="btn secondary">Browse Store</a>
-    </div>
-  </div>
-
-  <div class="hero-visual">
-
-    <img class="hero-slide active" src="imagefiles/WhatsApp Image 2025-11-16 at 19.27.53_8e1aeee5.jpg" alt="">
-    <img class="hero-slide" src="imagefiles/WhatsApp Image 2025-11-16 at 19.26.13_8c8b2bf4.jpg" alt="">
-    <img class="hero-slide" src="imagefiles/IMG-20251101-WA0009.jpg" alt="">
-    <img class="hero-slide" src="imagefiles/Horse Emblem.png" alt="">
-
-  </div>
-
-</section>
-
-<!-- VALUE -->
 <section class="section">
 
-  <h2>Why choose us for your next project?</h2>
+  <h1>Request a Quote</h1>
+  <p>
+    Provide as much detail as possible. This allows us to evaluate your project accurately and respond with a clear scope, timeline, and cost estimate.
+  </p>
 
-  <div class="grid-3">
+  <p id="successMsg" class="success-message"></p>
 
-    <div class="card">
-      <h3>Clean, usable models</h3>
-      <p>Structured and organized 3D assets that are easy to edit, export, and integrate into your workflow.</p>
-    </div>
+  <form id="quoteForm" class="auth-card">
 
-    <div class="card">
-      <h3>Made for real production</h3>
-      <p>Models prepared with practical use in mind — from prototyping to fabrication and digital use.</p>
-    </div>
+    <!-- CLIENT INFO -->
+    <h2>Contact Details</h2>
 
-    <div class="card">
-      <h3>Reliable delivery</h3>
-      <p>Clear communication and consistent turnaround times for international clients.</p>
-    </div>
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email Address" required>
 
-  </div>
+    <!-- PROJECT OVERVIEW -->
+    <h2>Project Overview</h2>
+
+    <input type="text" id="projectTitle" placeholder="Project Title (e.g. Gear Housing Redesign)" required>
+
+    <textarea id="description" rows="5" placeholder="Describe your project in detail. What needs to be designed, modified, or created?" required></textarea>
+
+    <!-- TECHNICAL DETAILS -->
+    <h2>Technical Requirements</h2>
+
+    <textarea id="dimensions" rows="3" placeholder="Dimensions, sizes, or scale (if known)"></textarea>
+
+    <textarea id="materials" rows="3" placeholder="Materials or manufacturing method (3D print, CNC, laser cut, etc.)"></textarea>
+
+    <textarea id="tolerances" rows="3" placeholder="Any tolerances, fit requirements, or mechanical constraints?"></textarea>
+
+    <div class="form-group">
+
+  <label>Reference Images</label>
+
+  <input 
+    type="file" 
+    id="projectImages" 
+    accept="image/*" 
+    multiple
+  >
+
+  <p class="form-hint">
+    Upload up to 5 images (max 5MB each). Use clear photos, sketches, or examples.
+  </p>
+
+</div>
+
+    <!-- TIMELINE + BUDGET -->
+    <h2>Timeline & Budget</h2>
+
+    <input type="text" id="deadline" placeholder="Deadline or required delivery date">
+
+    <input type="text" id="budget" placeholder="Estimated budget (optional but recommended)">
+
+    <!-- FINAL -->
+    <h2>Additional Notes</h2>
+
+    <textarea id="notes" rows="3" placeholder="Anything else we should know?"></textarea>
+
+    <button type="submit" class="btn primary">Submit Quote Request</button>
+
+    <p id="formMessage"></p>
+
+  </form>
 
 </section>
 
-<!-- SERVICES -->
-<section class="section dark">
+<!-- INFO SECTION BELOW FORM -->
+<section class="legal-container">
 
-  <h2>Services</h2>
+  <h2>How It Works</h2>
 
-  <div class="grid-2">
+  <p>
+    Once submitted, your request is reviewed and evaluated based on complexity, scope, and required deliverables.
+    You will receive a response with pricing, timeline, and next steps.
+  </p>
 
-    <div class="card wide">
-      <h3>Custom 3D CAD Work</h3>
-      <p>Design support for parts, assemblies, and product ideas from concept through to usable models.</p>
-    </div>
+  <ul>
+    <li>Response time: 24–72 hours</li>
+    <li>Clear scope and pricing breakdown provided</li>
+    <li>Revisions discussed before work begins</li>
+  </ul>
 
-    <div class="card wide">
-      <h3>3D Print Preparation</h3>
-      <p>Models prepared for printing with attention to structure, fit, and real-world constraints.</p>
-    </div>
+  <hr>
 
-    <div class="card wide">
-      <h3>Digital Asset Creation</h3>
-      <p>Optimized models for games, visualization, and general digital use with clean geometry.</p>
-    </div>
+  <h2>Pricing Structure</h2>
 
-    <div class="card wide">
-      <h3>Design Support & Iteration</h3>
-      <p>Assistance refining ideas into practical, workable designs through iteration and feedback.</p>
-    </div>
+  <ul>
+    <li><strong>Under $100:</strong> Full payment upfront</li>
+    <li><strong>$100 – $500:</strong> 30% deposit required</li>
+    <li><strong>$500+:</strong> 50% deposit required</li>
+  </ul>
 
-  </div>
+  <p>
+    Work begins only after deposit/payment is received.
+  </p>
 
-</section>
+  <hr>
 
-<!-- CTA -->
-<section class="cta">
+  <h2>Ownership & Usage</h2>
 
-  <h2>Have a project in mind?</h2>
-  <p>Send the details and we’ll turn it into a workable design you can actually use.</p>
-
-  <a href="contact.html" class="btn primary">Get in touch</a>
+  <p>
+    Final deliverables are transferred to the client upon full payment.
+    WBF Solutions & Design may display completed work in portfolios unless confidentiality is requested beforehand.
+  </p>
 
 </section>
 

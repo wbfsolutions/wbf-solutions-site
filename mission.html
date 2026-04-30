@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About</title>
 
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
-<body class="auth-page">
+<body class="legal-page">
 
 <!--Navbar-->
 <nav class="navbar">
@@ -63,80 +63,123 @@
 
 </nav>
 
-<!-- AUTH CONTENT -->
-<h1>Login</h1>
+<!-- HOW IT WORKS PAGE -->
 
-<div class="auth-card">
+<section class="section">
 
-  <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
+  <h1>How It Works</h1>
 
-  <button onclick="login()" class="btn primary">Login</button>
+  <p style="margin-top: 15px; max-width: 700px;">
+    Working with WBF Solutions & Design is a structured, straightforward process focused on delivering usable, production-ready 3D models.
+    From initial concept to final files, each step is designed to keep communication clear and results practical.
+  </p>
 
-  <p id="error" style="color:#ff6b6b; margin-top:10px;"></p>
+</section>
 
-  <p style="margin-top:10px;">
-  <a href="#" id="forgotPassword" style="color:#6AA6FF; font-size:14px;">
-    Forgot password?
-  </a>
-</p>
 
-<p id="error" style="color:#ff6b6b; margin-top:10px;"></p>
-<p id="success" style="color:#4ade80; margin-top:10px;"></p>
+<!-- PROCESS STEPS -->
+<section class="section dark">
 
-</div>
+  <h2>Process</h2>
 
-<!-- FIREBASE LOGIN LOGIC -->
-<script type="module">
-import { auth } from "./firebase.js";
-import {
-  signInWithEmailAndPassword,
-  sendEmailVerification
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  <div class="grid-3">
 
-window.login = async function () {
+    <div class="card">
+      <h3>1. Project Brief</h3>
+      <p>
+        Send through your idea, sketches, reference images, or existing files.
+        The more detail provided upfront, the more accurately the project can be scoped.
+      </p>
+    </div>
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const errorBox = document.getElementById("error");
+    <div class="card">
+      <h3>2. Review & Quotation</h3>
+      <p>
+        The project is evaluated based on complexity, detail, and intended use.
+        You’ll receive a clear quote, timeline, and scope before work begins.
+      </p>
+    </div>
 
-  errorBox.textContent = "";
+    <div class="card">
+      <h3>3. Design & Development</h3>
+      <p>
+        Models are built with a focus on structure, usability, and real-world application,
+        including manufacturing and fit where required.
+      </p>
+    </div>
 
-  if (!email || !password) {
-    errorBox.textContent = "Please enter email and password.";
-    return;
-  }
+    <div class="card">
+      <h3>4. Feedback & Revisions</h3>
+      <p>
+        Preview versions are shared for review. Adjustments are made based on your feedback
+        to ensure accuracy and alignment with your requirements.
+      </p>
+    </div>
 
-  try {
+    <div class="card">
+      <h3>5. Final Delivery</h3>
+      <p>
+        Final files are delivered in the required formats (STL, STEP, OBJ, etc),
+        cleanly structured and ready for use.
+      </p>
+    </div>
 
-    const userCred = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCred.user;
+  </div>
 
-    // 🚫 BLOCK IF NOT VERIFIED
-    if (!user.emailVerified) {
+</section>
 
-      await sendEmailVerification(user);
 
-      errorBox.textContent =
-        "Email not verified. A new verification email has been sent.";
+<!-- EXPECTATIONS -->
+<section class="section">
 
-      // optional: sign them out immediately
-      await auth.signOut();
+  <h2>What You Can Expect</h2>
 
-      return;
-    }
+  <div class="grid-3">
 
-    // ✅ ALLOW LOGIN
-    window.location.href = "index.html";
+    <div class="card">
+      <h3>Clear Communication</h3>
+      <p>Consistent updates and straightforward communication throughout the project.</p>
+    </div>
 
-  } catch (err) {
-    errorBox.textContent = err.message;
-  }
-};
-</script>
+    <div class="card">
+      <h3>Production-Ready Models</h3>
+      <p>Files structured for real-world use, not just visual presentation.</p>
+    </div>
 
-<!-- ✅ GLOBAL NAVBAR + AUTH STATE SCRIPT (CRITICAL) -->
-<script type="module" src="script.js"></script>
+    <div class="card">
+      <h3>Reliable Delivery</h3>
+      <p>Defined timelines and predictable turnaround based on project scope.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- INTERNATIONAL -->
+<section class="section dark">
+
+  <h2>Working Internationally</h2>
+
+  <p style="margin-top: 15px; max-width: 700px;">
+    Projects are handled remotely with a focus on clarity and efficiency.
+    Communication is structured to ensure smooth collaboration across time zones.
+  </p>
+
+</section>
+
+
+<!-- CTA -->
+<section class="cta">
+
+  <h2>Have a project in mind?</h2>
+  <p>Send the details and get a clear, no-obligation quote.</p>
+
+  <br>
+
+  <a href="quote.html" class="btn primary">Get a Quote</a>
+
+</section>
 
 <script type="module" src="script.js"></script>
 
