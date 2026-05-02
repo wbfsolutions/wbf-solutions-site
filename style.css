@@ -1356,12 +1356,6 @@ input[type="file"]::file-selector-button:hover {
   display: flex;
 }
 
-@media (min-width: 901px) {
-  .nav-search {
-    display: none !important;
-  }
-}
-
 /* =========================================================
    ANNOUNCEMENT BANNER (FIXED + RESPONSIVE)
 ========================================================= */
@@ -1453,4 +1447,103 @@ body.banner-active {
   body.banner-active {
     padding-top: 130px;
   }
+}
+
+/* =========================================================
+   Avatar Picker
+========================================================= */
+
+.editable-avatar {
+  cursor: pointer;
+}
+
+.editable-avatar:hover {
+  transform: scale(1.05);
+}
+
+.avatar-picker {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000005;
+}
+
+.avatar-picker.show {
+  display: flex;
+}
+
+.avatar-box {
+  width: 340px;
+  max-width: 92vw;
+
+  background: #0B1220;
+  border: 1px solid #1F2A44;
+  border-radius: 16px;
+
+  padding: 18px;
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.avatar-grid img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+
+  object-fit: cover;
+  cursor: pointer;
+
+  border: 2px solid transparent;
+  transition: 0.2s ease;
+}
+
+.avatar-grid img:hover {
+  border-color: #4F7CFF;
+  transform: scale(1.05);
+}
+
+.avatar-tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.avatar-tooltip::after {
+  content: "Change avatar";
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: #111B2E;
+  color: #F8FAFC;
+
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+
+  border: 1px solid #1F2A44;
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.15s ease;
+}
+
+.avatar-tooltip:hover::after {
+  opacity: 1;
+}
+
+.avatar-grid img.selected {
+  outline: 2px solid #4F7CFF;
+  border-radius: 10px;
 }

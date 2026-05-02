@@ -255,6 +255,69 @@
   </div>
 </div>
 
+<!-- ACCOUNT MENU -->
+<div id="accountMenu" class="side-menu account-menu">
+
+  <div class="side-header">
+    <h3>Account</h3>
+    <span onclick="closeMenus()" class="close-btn">×</span>
+  </div>
+
+  <div class="side-content">
+
+    <div class="account-info">
+      <div class="avatar-tooltip">
+  <img
+    id="accountAvatar"
+    src="imagefiles/default-avatar.png"
+    class="user-avatar editable-avatar"
+    alt="User"
+    onclick="openAvatarPicker()"
+     />
+</div>
+      <div id="accountName">Guest</div>
+      <div id="accountEmail"></div>
+    </div>
+
+    <div class="menu-section">
+      <a href="account.html">My Account</a>
+      <a href="orders.html">Orders</a>
+      <a href="settings.html">Settings</a>
+      <a href="#" id="accountLogout">Logout</a>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- AVATAR PICKER -->
+<div id="avatarPicker" class="avatar-picker">
+
+  <div class="avatar-box">
+
+    <div class="side-header">
+      <h3>Select Avatar</h3>
+      <span onclick="closeAvatarPicker()" class="close-btn">×</span>
+    </div>
+
+    <div class="avatar-grid">
+
+      <img src="imagefiles/Avatars/avatar1.png" onclick="selectAvatar('imagefiles/Avatars/avatar1.png')">
+      <img src="imagefiles/Avatars/avatar2.png" onclick="selectAvatar('imagefiles/Avatars/avatar2.png')">
+      <img src="imagefiles/Avatars/avatar3.png" onclick="selectAvatar('imagefiles/Avatars/avatar3.png')">
+      <img src="imagefiles/Avatars/avatar4.png" onclick="selectAvatar('imagefiles/Avatars/avatar4.png')">
+      <img src="imagefiles/Avatars/avatar5.png" onclick="selectAvatar('imagefiles/Avatars/avatar5.png')">
+      <img src="imagefiles/Avatars/avatar6.png" onclick="selectAvatar('imagefiles/Avatars/avatar6.png')">
+      <img src="imagefiles/Avatars/avatar7.png" onclick="selectAvatar('imagefiles/Avatars/avatar7.png')">
+      <img src="imagefiles/Avatars/avatar8.png" onclick="selectAvatar('imagefiles/Avatars/avatar8.png')">
+      <img src="imagefiles/Avatars/avatar9.png" onclick="selectAvatar('imagefiles/Avatars/avatar9.png')">
+
+    </div>
+
+  </div>
+
+</div>
+
 <!-- OVERLAY -->
 <div class="overlay" onclick="closeMenus()"></div>
 

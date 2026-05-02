@@ -38,6 +38,7 @@ import {
   getDownloadURL
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
+const DEFAULT_AVATAR = "imagefiles/Avatars/avatar1.png";
 
 /* =========================================================
    DOM READY
@@ -84,6 +85,16 @@ function setupMenus() {
   overlay?.addEventListener("click", closeMenus);
 }
 
+window.openAccountMenu = function () {
+  const sideMenu = document.getElementById("sideMenu");
+  const accountMenu = document.getElementById("accountMenu");
+  const overlay = document.querySelector(".overlay");
+
+  sideMenu?.classList.remove("open");
+  accountMenu?.classList.add("open");
+  overlay?.classList.add("show");
+};
+
 
 /* =========================================================
    NAVBAR AUTH STATE
@@ -109,13 +120,13 @@ function setupNavbarAuth() {
 
       if (avatar) {
         avatar.style.display = "none";
-        avatar.src = "imagefiles/default-avatar.png";
+        avatar.src = DEFAULT_AVATAR;
       }
 
       if (accountName) accountName.textContent = "Guest";
       if (accountEmail) accountEmail.textContent = "";
       if (accountAvatar) {
-        accountAvatar.src = "imagefiles/default-avatar.png";
+        accountAvatar.src = DEFAULT_AVATAR;
       }
 
       return;
@@ -128,17 +139,33 @@ function setupNavbarAuth() {
     if (avatar) {
       avatar.style.display = "inline-block";
       avatar.src =
-        user.photoURL || "imagefiles/default-avatar.png";
+        user.photoURL || DEFAULT_AVATAR;
 
-      avatar.onclick = () => {
-        closeMenus();
-        openAccountMenu();
-      };
+      if (avatar) {
+  avatar.style.display = "inline-block";
+  avatar.src = user.photoURL || DEFAULT_AVATAR;
+
+  avatar.style.cursor = "pointer";
+
+  avatar.onclick = () => {
+    closeMenus();
+    window.openAccountMenu();
+  };
+
+}
     }
 
     if (accountAvatar) {
+  accountAvatar.style.cursor = "pointer";
+
+  accountAvatar.onclick = () => {
+    window.openAvatarPicker();
+  };
+}
+
+    if (accountAvatar) {
       accountAvatar.src =
-        user.photoURL || "imagefiles/default-avatar.png";
+        user.photoURL || DEFAULT_AVATAR;
     }
 
     if (accountName) {
@@ -223,19 +250,21 @@ window.signUp = async function () {
       );
 
     await updateProfile(cred.user, {
-      displayName: name
-    });
+  displayName: name,
+  photoURL: DEFAULT_AVATAR
+});
 
     await setDoc(doc(db, "users", cred.user.uid), {
-      uid: cred.user.uid,
-      name,
-      email,
-      accountType,
-      companyName,
-      country,
-      subscribed,
-      createdAt: serverTimestamp()
-    });
+  uid: cred.user.uid,
+  name,
+  email,
+  accountType,
+  companyName,
+  country,
+  subscribed,
+  photoURL: DEFAULT_AVATAR,
+  createdAt: serverTimestamp()
+});
 
     await sendEmailVerification(cred.user);
 
@@ -275,7 +304,7 @@ window.signInWithGoogle = async function () {
         uid: user.uid,
         name: user.displayName || "",
         email: user.email || "",
-        photoURL: user.photoURL || "",
+        photoURL: user.photoURL || DEFAULT_AVATAR,
         createdAt: serverTimestamp()
       },
       { merge: true }
@@ -344,47 +373,43 @@ function setupForgotPassword() {
 function setupQuoteForm() {
 
   const form = document.getElementById("quoteForm");
-
   if (!form) return;
 
   form.addEventListener("submit", async (e) => {
-
     e.preventDefault();
 
-    const msg =
-      document.getElementById("formMessage");
-
+    const msg = document.getElementById("formMessage");
     msg.textContent = "";
     msg.style.color = "#94A3B8";
 
+    // 🔑 ALWAYS get user here (fresh state)
+    const user = auth.currentUser;
+
+    if (!user) {
+      msg.style.color = "#ff6b6b";
+      msg.textContent = "You must be logged in to submit a quote.";
+      return;
+    }
+
     try {
 
-      const fileInput =
-        document.getElementById("projectImages");
-
+      const fileInput = document.getElementById("projectImages");
       const files = fileInput?.files || [];
 
       const data = {
-        name:
-          document.getElementById("name")?.value.trim(),
-        email:
-          document.getElementById("email")?.value.trim(),
-        projectTitle:
-          document.getElementById("projectTitle")?.value.trim(),
-        description:
-          document.getElementById("description")?.value.trim(),
-        dimensions:
-          document.getElementById("dimensions")?.value.trim(),
-        materials:
-          document.getElementById("materials")?.value.trim(),
-        tolerances:
-          document.getElementById("tolerances")?.value.trim(),
-        deadline:
-          document.getElementById("deadline")?.value.trim(),
-        budget:
-          document.getElementById("budget")?.value.trim(),
-        notes:
-          document.getElementById("notes")?.value.trim(),
+        uid: user.uid,
+        email: user.email,
+
+        name: document.getElementById("name")?.value.trim(),
+        projectTitle: document.getElementById("projectTitle")?.value.trim(),
+        description: document.getElementById("description")?.value.trim(),
+        dimensions: document.getElementById("dimensions")?.value.trim(),
+        materials: document.getElementById("materials")?.value.trim(),
+        tolerances: document.getElementById("tolerances")?.value.trim(),
+        deadline: document.getElementById("deadline")?.value.trim(),
+        budget: document.getElementById("budget")?.value.trim(),
+        notes: document.getElementById("notes")?.value.trim(),
+
         fileURLs: [],
         status: "new",
         createdAt: serverTimestamp()
@@ -397,8 +422,7 @@ function setupQuoteForm() {
         !data.description
       ) {
         msg.style.color = "#ff6b6b";
-        msg.textContent =
-          "Please fill all required fields.";
+        msg.textContent = "Please fill all required fields.";
         return;
       }
 
@@ -407,33 +431,25 @@ function setupQuoteForm() {
       for (let i = 0; i < files.length; i++) {
 
         const file = files[i];
-
         if (!file.type.startsWith("image/")) continue;
 
         const storageRef = ref(
           storage,
-          `quotes/${Date.now()}_${file.name}`
+          `quotes/${user.uid}/${Date.now()}_${file.name}`
         );
 
-        const snap =
-          await uploadBytes(storageRef, file);
-
-        const url =
-          await getDownloadURL(snap.ref);
+        const snap = await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(snap.ref);
 
         data.fileURLs.push(url);
       }
 
       msg.textContent = "Submitting request...";
 
-      await addDoc(
-        collection(db, "quotes"),
-        data
-      );
+      await addDoc(collection(db, "quotes"), data);
 
       msg.style.color = "#4F7CFF";
-      msg.textContent =
-        "Quote request submitted successfully.";
+      msg.textContent = "Quote request submitted successfully.";
 
       form.reset();
 
@@ -441,7 +457,6 @@ function setupQuoteForm() {
       msg.style.color = "#ff6b6b";
       msg.textContent = err.message;
     }
-
   });
 }
 
@@ -556,3 +571,51 @@ window.showBanner = function (message, link) {
 window.addEventListener("DOMContentLoaded", () => {
   showBanner("🎮 New game just dropped on Google Play — download now", "https://play.google.com/store/apps/details?id=com.wbfsolutions.bubblerun");
 });
+
+// =========================================================
+// Avatar Picker
+// =========================================================
+window.openAvatarPicker = function () {
+  document.getElementById("avatarPicker")?.classList.add("show");
+};
+
+window.closeAvatarPicker = function () {
+  document.getElementById("avatarPicker")?.classList.remove("show");
+};
+
+window.selectAvatar = async function (src) {
+
+  const user = auth.currentUser;
+  if (!user) return;
+
+  try {
+
+    await updateProfile(user, {
+      photoURL: src
+    });
+
+    await setDoc(
+      doc(db, "users", user.uid),
+      { photoURL: src },
+      { merge: true }
+    );
+
+    const navAvatar = document.getElementById("userAvatar");
+    const accAvatar = document.getElementById("accountAvatar");
+
+    if (navAvatar) navAvatar.src = src;
+    if (accAvatar) accAvatar.src = src;
+
+    closeAvatarPicker();
+
+  } catch (err) {
+    alert(err.message);
+  }
+};
+
+document.querySelectorAll(".avatar-grid img")
+  .forEach(img => img.classList.remove("selected"));
+
+document.querySelector(
+  `.avatar-grid img[src="${src}"]`
+)?.classList.add("selected");
