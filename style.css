@@ -90,7 +90,16 @@ a:hover {
 
   z-index: 9999;
 
-  overflow: hidden; /* 🔥 prevents dropdown pushing layout */
+  overflow: visible; /* 🔥 prevents dropdown pushing layout */
+}
+
+.nav-search {
+  position: relative;
+  z-index: 10000;
+}
+
+.search-results {
+  z-index: 10001;
 }
 
 /* LEFT */
@@ -235,17 +244,6 @@ a:hover {
 /* =========================================================
    MENU TOGGLE
 ========================================================= */
-.menu-toggle {
-  font-size: 26px;
-  cursor: pointer;
-  color: #F8FAFC;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-}
 
 /* =========================================================
    BUTTONS
@@ -426,7 +424,7 @@ a:hover {
     text-align: center;
   }
 
-  .navbar {
+  /*.navbar {
     padding: 0 20px;
   }
 
@@ -783,7 +781,6 @@ canvas {
   position: absolute;
   top: 110%;
   left: 0;
-
   width: 100%;
 
   background: #111B2E;
@@ -792,10 +789,11 @@ canvas {
 
   display: none;
   z-index: 99999;
-
-  overflow: hidden;
 }
 
+.search-results.show {
+  display: block;
+}
 /* items */
 .search-item {
   padding: 10px;
@@ -879,57 +877,24 @@ canvas {
 ========================================================= */
 @media (max-width: 900px) {
 
-  .navbar {
-    display: flex;
+  /*.navbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: space-between;
+    padding: 0 10px;
     height: 70px;
-    padding: 0 12px;
   }
 
-  /* LEFT = hamburger */
+  /* LEFT: hamburger */
   .menu-toggle {
-    order: 1;
-    position: static;
+    justify-self: start;
   }
 
-  /* CENTER = logo */
-  .nav-left {
-    order: 2;
-    position: static;
-    transform: none;
-  }
-
-  /* CENTER AREA (search stays visible) */
+  /* CENTER: search */
   .nav-center {
-    display: flex !important;
-    order: 3;
-    flex: 1;
-    justify-content: center;
-  }
-
-  /* RIGHT = 3-dot + user */
-  .nav-right {
-    order: 4;
-    position: static;
-  }
-
-  /* hide page links ONLY (not search) */
-  .nav-center > a {
-    display: none;
-  }
-
-  .nav-search {
     display: flex;
-  }
-}
-
-@media (max-width: 900px) {
-  .nav-center {
-    display: flex !important;
     justify-content: center;
     align-items: center;
-    flex: 1;
   }
 
   .nav-search {
@@ -940,19 +905,29 @@ canvas {
   .nav-search input {
     width: 100%;
   }
-}
 
-/* hide page links in DESKTOP 3-dot menu */
-@media (min-width: 901px) {
-  .nav-links {
+  /* RIGHT: user/menu */
+  .nav-right {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* hide ONLY page links */
+  .nav-center a {
     display: none;
+  }
+
+  /* hide signup button */
+  #signupLink {
+    display: none !important;
   }
 }
 
-/* optional: ensure mobile still shows it */
 @media (max-width: 900px) {
-  .nav-links {
-    display: block;
+  .nav-search {
+    display: none;
   }
 }
 
@@ -1157,8 +1132,12 @@ input[type="file"]::file-selector-button:hover {
 
 /* REMOVE NAV SEARCH ON MOBILE (navbar only) */
 @media (max-width: 900px) {
+  .nav-center > a {
+    display: none;
+  }
+
   .nav-search {
-    display: none !important;
+    width: 160px;
   }
 }
 
@@ -1547,3 +1526,22 @@ body.banner-active {
   outline: 2px solid #4F7CFF;
   border-radius: 10px;
 }
+
+/* NAVBAR search */
+.nav-search .search-results {
+  display: none;
+}
+
+.nav-search .search-results.show {
+  display: block;
+}
+
+/* MENU search */
+.menu-search .search-results {
+  display: none;
+}
+
+.menu-search .search-results.show {
+  display: block;
+}
+

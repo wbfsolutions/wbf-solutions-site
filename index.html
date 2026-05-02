@@ -31,15 +31,15 @@
   <div class="nav-center">
 
     <a href="index.html">Home</a>
-    <a href="new.html">Portfolio</a>
-    <a href="new.html">Store</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="store.html">Store</a>
     <a href="contact.html">Contact</a>
 
     <div class="nav-search">
-      <input type="text" id="searchInput" placeholder="Search..." autocomplete="off"/>
-      <button onclick="runSearch()">⌕</button>
-      <div id="searchResults" class="search-results"></div>
-    </div>
+  <input id="searchInput" type="text" placeholder="Search..." />
+  
+  <div id="searchResults" class="search-results"></div>
+</div>
 
   </div>
 
@@ -189,7 +189,7 @@
 
       <div class="menu-search">
         <input type="text" id="mobileSearchInput" placeholder="Search..." autocomplete="off"/>
-        <button onclick="runMobileSearch()">⌕</button>
+        <button onclick="document.getElementById('mobileSearchInput').dispatchEvent(new Event('input'))">⌕</button>
         <div id="mobileSearchResults" class="search-results"></div>
       </div>
 
@@ -208,8 +208,8 @@
         <button class="accordion-btn" onclick="toggleAccordion(this)">Main</button>
         <div class="accordion-panel">
           <a href="index.html">Home</a>
-          <a href="new.html">Portfolio</a>
-          <a href="new.html">Store</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="store.html">Store</a>
           <a href="contact.html">Contact</a>
         </div>
       </div>
@@ -280,9 +280,9 @@
     </div>
 
     <div class="menu-section">
-      <a href="account.html">My Account</a>
-      <a href="orders.html">Orders</a>
-      <a href="settings.html">Settings</a>
+      <a href="new.html">My Account</a>
+      <a href="new.html">Orders</a>
+      <a href="new.html">Settings</a>
       <a href="#" id="accountLogout">Logout</a>
     </div>
 

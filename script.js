@@ -514,25 +514,6 @@ function setupAccountTypeToggle() {
   type.addEventListener("change", run);
 
   run();
-}
-
-window.runMobileSearch = function () {
-  const input = document.getElementById("mobileSearchInput");
-  const results = document.getElementById("mobileSearchResults");
-
-  if (!input || !results) return;
-
-  const query = input.value.trim().toLowerCase();
-
-  if (!query) {
-    results.style.display = "none";
-    return;
-  }
-
-  results.style.display = "block";
-  results.innerHTML = `
-    <div class="search-item">Searching for: ${query}</div>
-  `;
 };
 
 // =========================================================
@@ -613,9 +594,112 @@ window.selectAvatar = async function (src) {
   }
 };
 
-document.querySelectorAll(".avatar-grid img")
-  .forEach(img => img.classList.remove("selected"));
+// =========================================================
+// CLEAN SEARCH SYSTEM (FINAL)
+// =========================================================
 
-document.querySelector(
-  `.avatar-grid img[src="${src}"]`
-)?.classList.add("selected");
+// SINGLE DATA SOURCE
+const searchIndex = [
+  { title: "Home", url: "index.html", keywords: ["home", "landing", "wbf"] },
+  { title: "Services", url: "services.html", keywords: ["cad", "design", "3d", "engineering"] },
+  { title: "Contact", url: "contact.html", keywords: ["contact", "email", "support"] },
+  { title: "Quotes", url: "quote.html", keywords: ["quote", "upload", "pricing"] }
+];
+
+// SEARCH ENGINE
+function performSearch(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) return [];
+
+  return searchIndex.filter(item =>
+    item.title.toLowerCase().includes(q) ||
+    item.keywords.some(k => k.includes(q))
+  );
+}
+
+// RENDER FUNCTION (works for BOTH navbar + mobile)
+function renderResults(results, container) {
+  container.innerHTML = "";
+
+  if (!results.length) {
+    container.innerHTML = `<div class="search-item">No results</div>`;
+    container.style.display = "block";
+    return;
+  }
+
+  results.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "search-item";
+
+    div.innerHTML = `<strong>${item.title}</strong>`;
+
+    div.onclick = () => {
+      window.location.href = item.url;
+    };
+
+    container.appendChild(div);
+  });
+
+  container.style.display = "block";
+}
+
+// INIT
+document.addEventListener("DOMContentLoaded", () => {
+
+  // NAVBAR SEARCH
+  const navInput = document.getElementById("searchInput");
+  const navResults = document.getElementById("searchResults");
+
+  if (navInput && navResults) {
+    navInput.addEventListener("input", () => {
+      const results = performSearch(navInput.value);
+      renderResults(results, navResults);
+    });
+
+    navInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const results = performSearch(navInput.value);
+        if (results[0]) window.location.href = results[0].url;
+      }
+    });
+  }
+
+  // MOBILE SEARCH
+  const mobileInput = document.getElementById("mobileSearchInput");
+  const mobileResults = document.getElementById("mobileSearchResults");
+
+  if (mobileInput && mobileResults) {
+    mobileInput.addEventListener("input", () => {
+      const results = performSearch(mobileInput.value);
+      renderResults(results, mobileResults);
+    });
+  }
+
+  // CLOSE DROPDOWNS
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".nav-search")) {
+      navResults?.style.setProperty("display", "none");
+    }
+
+    if (!e.target.closest(".menu-search")) {
+      mobileResults?.style.setProperty("display", "none");
+    }
+  });
+
+});
+
+document.addEventListener("click", (e) => {
+
+  // CLOSE NAV SEARCH
+  if (!e.target.closest(".nav-search")) {
+    const nav = document.getElementById("searchResults");
+    if (nav) nav.style.display = "none";
+  }
+
+  // CLOSE MOBILE SEARCH
+  if (!e.target.closest(".menu-search")) {
+    const mobile = document.getElementById("mobileSearchResults");
+    if (mobile) mobile.style.display = "none";
+  }
+
+});
