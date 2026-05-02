@@ -879,19 +879,12 @@ canvas {
 }
 
 /* =========================================================
-   📱 MOBILE NAV LAYOUT (CLEAN FIX)
+   📱 MOBILE (max-width: 900px)
 ========================================================= */
+
 @media (max-width: 900px) {
 
-  /*
-  .navbar {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    padding: 0 10px;
-    height: 70px;
-  }
-  */
+  /* ================= NAVBAR ================= */
 
   .menu-toggle {
     justify-self: start;
@@ -903,13 +896,12 @@ canvas {
     align-items: center;
   }
 
-  .nav-search {
-    width: 100%;
-    max-width: 180px;
+  .nav-center a {
+    display: none;
   }
 
-  .nav-search input {
-    width: 100%;
+  #signupLink {
+    display: none !important;
   }
 
   .nav-right {
@@ -919,29 +911,36 @@ canvas {
     gap: 10px;
   }
 
-  .nav-center a {
-    display: none;
-  }
-
-  #signupLink {
-    display: none !important;
-  }
-}
-
-@media (max-width: 900px) {
+  /* hide search completely on mobile */
   .nav-search {
     display: none;
   }
-}
 
-@media (max-width: 900px) {
+  /* ================= HERO ================= */
+
   .hero {
     padding: 60px 20px;
     gap: 30px;
+    text-align: center;
   }
-}
 
-@media (max-width: 900px) {
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-visual {
+    height: 260px;
+  }
+
+  /* ================= BODY OFFSET ================= */
+
   body {
     padding-top: 70px;
   }
@@ -951,6 +950,14 @@ canvas {
   }
 }
 
+/* =========================================================
+   GLOBAL SAFETY FIX
+========================================================= */
+
+body,
+html {
+  overflow-x: hidden;
+}
 /* =========================================================
    COMING SOON LOGO (CLEAN FIX)*/
 
