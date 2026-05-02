@@ -24,15 +24,15 @@
   <div class="nav-center">
 
     <a href="index.html">Home</a>
-    <a href="new.html">Portfolio</a>
-    <a href="new.html">Store</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="store.html">Store</a>
     <a href="contact.html">Contact</a>
 
     <div class="nav-search">
-      <input type="text" id="searchInput" placeholder="Search..." autocomplete="off"/>
-      <button onclick="runSearch()">⌕</button>
-      <div id="searchResults" class="search-results"></div>
-    </div>
+  <input id="searchInput" type="text" placeholder="Search..." />
+  
+  <div id="searchResults" class="search-results"></div>
+</div>
 
   </div>
 
@@ -50,8 +50,7 @@
       >
 
       <a href="login.html" id="loginLink">Sign In</a>
-      <a href="signup.html" id="signupLink">Sign Up</a>
-
+     <a href="signup.html" id="signupLink" class="desktop-only">Sign Up</a>
     </div>
 
     <div class="menu-toggle" onclick="toggleMenu()">
@@ -201,67 +200,137 @@
 
   <div class="side-content">
 
-    <!-- MOBILE ONLY NAV (we hide/show via CSS) -->
-    <div class="menu-section nav-links">
-      <h4>Main</h4>
-      <a href="index.html">Home</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="store.html">Store</a>
-      <a href="contact.html">Contact</a>
+    <!-- QUICK ACTIONS -->
+    <div class="menu-quick">
+
+      <div class="menu-search">
+        <input type="text" id="mobileSearchInput" placeholder="Search..." autocomplete="off"/>
+        <button onclick="document.getElementById('mobileSearchInput').dispatchEvent(new Event('input'))">⌕</button>
+        <div id="mobileSearchResults" class="search-results"></div>
+      </div>
+
+      <div class="menu-auth-row mobile-auth">
+        <a href="login.html">Sign In</a>
+        <a href="signup.html">Sign Up</a>
+      </div>
+
     </div>
 
-    <div class="menu-section">
-      <h4>Legal</h4>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms & Conditions</a>
-    </div>
+    <!-- ACCORDION SECTION -->
+    <div class="accordion">
 
-    <div class="menu-section">
-      <h4>WBF Solutions</h4>
-      <a href="about.html">About Us</a>
-      <a href="mission.html">Our Mission</a>
-    </div>
+      <!-- MAIN -->
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">Main</button>
+        <div class="accordion-panel">
+          <a href="index.html">Home</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="store.html">Store</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
 
-    <div class="menu-section">
-      <h4>Social</h4>
-      <a href="https://www.instagram.com/wbf_solutions_design/" target="_blank">Instagram</a>
-      <a href="https://www.facebook.com/share/1EL3WsSLWQ/" target="_blank">Facebook</a>
-    </div>
+      <!-- LEGAL -->
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">Legal</button>
+        <div class="accordion-panel">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms & Conditions</a>
+        </div>
+      </div>
 
-    <div class="menu-section">
-      <h4>Need Help</h4>
-      <a href="contact.html">Contact Us</a>
-      <a href="new.html">Q&A</a>
+      <!-- WBF -->
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">WBF Solutions</button>
+        <div class="accordion-panel">
+          <a href="about.html">About Us</a>
+          <a href="mission.html">How it Works</a>
+        </div>
+      </div>
+
+      <!-- SOCIAL -->
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">Social</button>
+        <div class="accordion-panel">
+          <a href="https://www.instagram.com/wbf_solutions_design/" target="_blank">Instagram</a>
+          <a href="https://www.facebook.com/share/1EL3WsSLWQ/" target="_blank">Facebook</a>
+        </div>
+      </div>
+
+      <!-- SUPPORT -->
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">Support</button>
+        <div class="accordion-panel">
+          <a href="contact.html">Contact Us</a>
+          <a href="new.html">Q&A</a>
+        </div>
+      </div>
+
     </div>
 
   </div>
 </div>
-</div>
 
 <!-- ACCOUNT MENU -->
-<div id="accountOverlay" class="overlay"></div>
-
 <div id="accountMenu" class="side-menu account-menu">
 
   <div class="side-header">
     <h3>Account</h3>
+    <span onclick="closeMenus()" class="close-btn">×</span>
   </div>
 
-  <div class="account-info">
-    <img id="accountAvatar" class="user-avatar" src="imagefiles/default-avatar.png"/>
-    <p id="accountName">Guest</p>
-    <p id="accountEmail"></p>
+  <div class="side-content">
+
+    <div class="account-info">
+      <div class="avatar-tooltip">
+  <img
+    id="accountAvatar"
+    src="imagefiles/default-avatar.png"
+    class="user-avatar editable-avatar"
+    alt="User"
+    onclick="openAvatarPicker()"
+     />
+</div>
+      <div id="accountName">Guest</div>
+      <div id="accountEmail"></div>
+    </div>
+
+    <div class="menu-section">
+      <a href="new.html">Profile</a>
+      <a href="new.html">Settings</a>
+      <a href="new.html">Orders</a>
+       <a href="new.html">Downloads</a>
+      <a href="#" id="accountLogout">Logout</a>
+    </div>
+
   </div>
 
-  <div class="menu-section">
-    <a href="new.html">Profile</a>
-    <a href="new.html">Settings</a>
-    <a href="new.html">Orders</a>
-    <a href="new.html">Downloads</a>
-  </div>
+</div>
 
-  <div class="menu-section">
-    <a id="accountLogout">Logout</a>
+<!-- AVATAR PICKER -->
+<div id="avatarPicker" class="avatar-picker">
+
+  <div class="avatar-box">
+
+    <div class="side-header">
+      <h3>Select Avatar</h3>
+      <span onclick="closeAvatarPicker()" class="close-btn">×</span>
+    </div>
+
+    <div class="avatar-grid">
+
+      <img src="imagefiles/Avatars/avatar1.png" onclick="selectAvatar('imagefiles/Avatars/avatar1.png')">
+      <img src="imagefiles/Avatars/avatar2.png" onclick="selectAvatar('imagefiles/Avatars/avatar2.png')">
+      <img src="imagefiles/Avatars/avatar3.png" onclick="selectAvatar('imagefiles/Avatars/avatar3.png')">
+      <img src="imagefiles/Avatars/avatar4.png" onclick="selectAvatar('imagefiles/Avatars/avatar4.png')">
+      <img src="imagefiles/Avatars/avatar5.png" onclick="selectAvatar('imagefiles/Avatars/avatar5.png')">
+      <img src="imagefiles/Avatars/avatar6.png" onclick="selectAvatar('imagefiles/Avatars/avatar6.png')">
+      <img src="imagefiles/Avatars/avatar7.png" onclick="selectAvatar('imagefiles/Avatars/avatar7.png')">
+      <img src="imagefiles/Avatars/avatar8.png" onclick="selectAvatar('imagefiles/Avatars/avatar8.png')">
+      <img src="imagefiles/Avatars/avatar9.png" onclick="selectAvatar('imagefiles/Avatars/avatar9.png')">
+
+    </div>
+
   </div>
 
 </div>

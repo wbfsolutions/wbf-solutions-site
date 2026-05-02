@@ -676,21 +676,27 @@ a:hover {
 
 .check-row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;   /* vertical alignment */
   gap: 10px;
-  font-size: 12px;
-  color: #94A3B8;
-  margin-top: 10px;
-  line-height: 1.4;
+
+  width: fit-content;
+  margin: 12px auto 0;
+
+  white-space: nowrap;   /* 🔥 prevents line break */
+  cursor: pointer;
 }
 
-.check-row input {
-  margin-top: 2px;
-  accent-color: #4F7CFF;
+.check-row span {
+  display: inline;       /* ensure inline flow */
 }
 
 .check-row a {
   color: #6AA6FF;
+  text-decoration: none;
+}
+
+.check-row a:hover {
+  text-decoration: underline;
 }
 
 .hidden {
@@ -1543,5 +1549,25 @@ body.banner-active {
 
 .menu-search .search-results.show {
   display: block;
+}
+
+/*Signup on login*/
+
+.auth-switch {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #94A3B8;
+  text-align: center;
+}
+
+.auth-switch a {
+  color: #6AA6FF;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+  color: #A5C8FF;
 }
 
