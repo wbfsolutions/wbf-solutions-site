@@ -387,7 +387,7 @@ function setupQuoteForm() {
 
     if (!user) {
       msg.style.color = "#ff6b6b";
-      msg.textContent = "You must be logged in to submit a quote.";
+      msg.textContent = "You must be logged in to submit a request.";
       return;
     }
 
@@ -702,4 +702,48 @@ document.addEventListener("click", (e) => {
     if (mobile) mobile.style.display = "none";
   }
 
+});
+
+// ============================
+// STORE IMAGE SLIDERS
+// ============================
+
+function initSliders() {
+  const sliders = document.querySelectorAll("[data-slider]");
+
+  sliders.forEach((slider) => {
+    const slides = slider.querySelectorAll(".slide");
+    let index = 0;
+
+    if (slides.length <= 1) return;
+
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 3000);
+  });
+}
+
+// run on load
+window.addEventListener("DOMContentLoaded", initSliders);
+
+// ============================
+// LICENSE MODAL CONTROL
+// ============================
+
+function openLicenseModal() {
+  document.getElementById("licenseModal").classList.add("show");
+}
+
+function closeLicenseModal() {
+  document.getElementById("licenseModal").classList.remove("show");
+}
+
+// close on outside click
+window.addEventListener("click", function (e) {
+  const modal = document.getElementById("licenseModal");
+  if (e.target === modal) {
+    modal.classList.remove("show");
+  }
 });

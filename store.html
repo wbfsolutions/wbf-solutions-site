@@ -65,23 +65,221 @@
 
 </nav>
 
-<h1>Asset Store</h1>
+<!-- LICENSING STRIP -->
+<div class="license-strip">
 
-<div class="grid">
-
-  <div class="card">
-    <h3>Dragon Alpha Pack</h3>
-    <p>$5</p>
-    <a href="https://gumroad.com/l/your-product" class="btn buy">Buy</a>
+  <div class="license-summary">
+    <strong>Licensing:</strong>
+    All products include a Personal Use License. Commercial or resale usage requires a separate written agreement.
   </div>
 
-  <div class="card">
-    <h3>Industrial Textures</h3>
-    <p>$8</p>
-    <a href="https://gumroad.com/l/your-product" class="btn buy">Buy</a>
+  <button class="license-btn" onclick="openLicenseModal()">
+    View Terms
+  </button>
+
+</div>
+
+<!-- PAGE TITLE -->
+<h1 class="store-title">Digital Asset Store</h1>
+
+<p class="store-subtitle">
+CAD-ready 3D assets for prototyping, manufacturing concepts, visualization, and digital production workflows.
+All purchases are delivered via Gumroad.
+</p>
+
+<!-- LICENSE STRUCTURE (NEW CLEAN SECTION) -->
+<section class="license-overview">
+
+  <h2>Licensing Overview</h2>
+
+  <div class="license-grid">
+
+    <div class="license-card">
+      <h3>Personal License</h3>
+      <p>
+        Included with all purchases. Grants a single-user right to use the asset for personal,
+        educational, and non-commercial projects only.
+      </p>
+    </div>
+
+    <div class="license-card">
+      <h3>Seller License</h3>
+      <p>
+        Allows use in physical products for resale up to 100 units per year.
+        Requires a separate written agreement before activation.
+      </p>
+    </div>
+
+    <div class="license-card">
+      <h3>Commercial License</h3>
+      <p>
+        Unlimited commercial usage for physical product integration.
+        Requires active annual agreement and written approval.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="license-warning">
+    <p>
+      Digital files may not be shared, redistributed, resold, or uploaded to any platform.
+      Licenses apply only to the original purchaser or approved entity.
+    </p>
+  </div>
+
+  <div class="license-contact">
+    <p>
+      Extended licenses must be requested directly via email:
+    </p>
+
+<a href="mailto:wbf.solutions.sales@gmail.com?subject=License%20Request%20-%20WBF%20Solutions&body=Hello%20I%20(your%20full%20legal%20name%20%26%20surname)%20would%20like%20to%20request%20a%20license%20for%20your%203D%20assets%20(Asset%20Name).%20I%20am%20interested%20in%20a%20(License%20Type)%20use%20the%20asset%20for%20(briefly%20describe%20your%20intended%20use).%20Thank%20you.">
+  Request Seller / Commercial License
+</a>
+  </div>
+
+</section>
+
+<!-- STORE GRID -->
+<section class="store-grid">
+
+  <!-- PRODUCT 1 -->
+  <div class="store-card">
+
+    <div class="store-slider" data-slider>
+      <img src="imagefiles/product1-1.jpg" class="slide active">
+      <img src="imagefiles/product1-2.jpg" class="slide">
+      <img src="imagefiles/product1-3.jpg" class="slide">
+    </div>
+
+    <div class="store-card-header">
+      <h3>Dragon Alpha Pack</h3>
+      <span class="tag">3D Asset Pack</span>
+    </div>
+
+    <p class="store-desc">
+      High-detail creature asset optimized for rendering, animation, and concept development.
+    </p>
+
+    <div class="store-meta">
+      <span class="price">$5</span>
+      <span>Instant Download</span>
+    </div>
+
+    <a class="store-btn" href="https://gumroad.com/l/your-product">
+      Buy via Gumroad
+    </a>
+
+  </div>
+
+  <!-- PRODUCT 2 -->
+  <div class="store-card">
+
+    <div class="store-slider" data-slider>
+      <img src="imagefiles/product2-1.jpg" class="slide active">
+      <img src="imagefiles/product2-2.jpg" class="slide">
+      <img src="imagefiles/product2-3.jpg" class="slide">
+    </div>
+
+    <div class="store-card-header">
+      <h3>Industrial Texture Set</h3>
+      <span class="tag">Material Pack</span>
+    </div>
+
+    <p class="store-desc">
+      Seamless industrial-grade materials designed for CAD visualization and prototyping workflows.
+    </p>
+
+    <div class="store-meta">
+      <span class="price">$8</span>
+      <span>Instant Download</span>
+    </div>
+
+    <a class="store-btn" href="https://gumroad.com/l/your-product">
+      Buy via Gumroad
+    </a>
+
+  </div>
+
+</section>
+
+<!-- LICENSING CTA SECTION -->
+<section class="license-box">
+
+  <h2>Extended Licensing</h2>
+
+  <p>
+    For commercial use, resale rights, or integration into client deliverables, a formal license agreement is required.
+    All extended licenses are issued manually after review.
+  </p>
+
+<a href="mailto:wbf.solutions.sales@gmail.com?subject=License%20Request%20-%20WBF%20Solutions&body=Hello%20I%20(your%20full%20legal%20name%20%26%20surname)%20would%20like%20to%20request%20a%20license%20for%20your%203D%20assets%20(Asset%20Name).%20I%20am%20interested%20in%20a%20(License%20Type)%20use%20the%20asset%20for%20(briefly%20describe%20your%20intended%20use).%20Thank%20you.">
+  Request Seller / Commercial License
+</a>
+
+</section>
+
+<!-- LICENSE MODAL -->
+<div id="licenseModal" class="license-modal">
+
+  <div class="license-modal-box">
+
+    <div class="license-modal-header">
+      <h2>Licensing Terms</h2>
+      <button onclick="closeLicenseModal()">×</button>
+    </div>
+
+    <div class="license-modal-content">
+
+      <p>
+        All digital assets are licensed, not sold. Purchase grants usage rights under defined conditions.
+      </p>
+
+      <h3>Core Restrictions</h3>
+      <ul>
+        <li>No sharing, redistribution, or resale of source files</li>
+        <li>No uploading to marketplaces or asset libraries</li>
+        <li>Each license is bound to a single user or entity</li>
+        <li>License does not transfer ownership of intellectual property</li>
+      </ul>
+
+      <h3>Usage Structure</h3>
+      <ul>
+        <li><strong>Personal License:</strong> Non-commercial use only</li>
+        <li><strong>Seller License:</strong> Up to 100 units/year (approval required)</li>
+        <li><strong>Commercial License:</strong> Unlimited usage under active agreement</li>
+      </ul>
+
+      <h3>Enforcement</h3>
+      <p>
+        Extended licenses require written approval and remain active only while terms and payments are maintained.
+        Breach of terms results in immediate termination of usage rights.
+        These terms are part of our terms of use and are legally binding. For questions or license requests, contact us at <a href="mailto:wbf.solutions.sales@gmail.com">wbf.solutions.sales@gmail.com</a>
+        By purchasing, you agree to these licensing terms and our <a href="terms.html">Terms & Conditions</a>.
+      </p>
+
+    </div>
+
   </div>
 
 </div>
+
+<!-- SCRIPTS -->
+<script type="module" src="script.js"></script>
+
+<script>
+function openLicenseModal() {
+  document.getElementById("licenseModal").classList.add("show");
+}
+
+function closeLicenseModal() {
+  document.getElementById("licenseModal").classList.remove("show");
+}
+
+window.addEventListener("click", function (e) {
+  const modal = document.getElementById("licenseModal");
+  if (e.target === modal) modal.classList.remove("show");
+});
+</script>
 
 <!--Footer-->
 <footer>

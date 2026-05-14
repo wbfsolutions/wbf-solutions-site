@@ -1592,3 +1592,750 @@ body.banner-active {
   color: #A5C8FF;
 }
 
+/* =========================================================
+   PORTFOLIO PAGE
+   Add this near bottom of your CSS
+========================================================= */
+
+.portfolio-page {
+  background:
+    radial-gradient(circle at top right, rgba(79,124,255,0.08), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(106,166,255,0.05), transparent 30%),
+    #0B1220;
+}
+
+/* MAIN WRAP */
+.portfolio-main {
+  width: 100%;
+  padding: 40px 20px 80px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.portfolio-hero {
+  max-width: 1150px;
+  margin: 0 auto 40px;
+
+  padding: 60px 40px;
+
+  background: linear-gradient(145deg, #111B2E, #0E1626);
+  border: 1px solid #1F2A44;
+  border-radius: 20px;
+
+  text-align: center;
+}
+
+.portfolio-hero h1 {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.portfolio-hero p {
+  max-width: 700px;
+  margin: 14px auto 0;
+  color: #94A3B8;
+}
+
+.hero-buttons {
+  margin-top: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: #4F7CFF;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #3B66E3;
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.btn-secondary {
+  border: 1px solid #1F2A44;
+  background: #111B2E;
+  color: #CBD5E1;
+}
+
+.btn-secondary:hover {
+  border-color: #4F7CFF;
+  color: #F8FAFC;
+  text-decoration: none;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.portfolio-stats {
+  max-width: 1150px;
+  margin: 0 auto 30px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-box {
+  background: #111B2E;
+  border: 1px solid #1F2A44;
+  border-radius: 16px;
+  padding: 22px;
+  text-align: center;
+}
+
+.stat-box h3 {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.stat-box span {
+  font-size: 13px;
+  color: #94A3B8;
+}
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.portfolio-filters {
+  max-width: 1150px;
+  margin: 0 auto 30px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.portfolio-filters button {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #1F2A44;
+  background: #111B2E;
+  color: #CBD5E1;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.portfolio-filters button:hover,
+.portfolio-filters button.active {
+  background: #4F7CFF;
+  border-color: #4F7CFF;
+  color: #fff;
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.portfolio-grid {
+  max-width: 1150px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* =========================================================
+   PROJECT CARD
+========================================================= */
+
+.project-card {
+  background: #111B2E;
+  border: 1px solid #1F2A44;
+  border-radius: 18px;
+  overflow: hidden;
+
+  transition: 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(79,124,255,0.55);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+/* IMAGE PLACEHOLDER AREA */
+.project-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+
+  background: linear-gradient(145deg, #0E1626, #16233A);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+/* actual image */
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* if no image yet */
+.project-image.placeholder::before {
+  content: "PROJECT IMAGE";
+  color: #64748B;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* top badge */
+.project-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  background: rgba(11,18,32,0.82);
+  border: 1px solid #1F2A44;
+  color: #CBD5E1;
+
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+/* text area */
+.project-info {
+  padding: 18px;
+}
+
+.project-info h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.project-info p {
+  font-size: 14px;
+  color: #94A3B8;
+  margin-bottom: 12px;
+}
+
+.project-meta {
+  font-size: 12px;
+  color: #6AA6FF;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.portfolio-cta {
+  max-width: 900px;
+  margin: 70px auto 0;
+
+  text-align: center;
+  padding: 50px 30px;
+
+  background: linear-gradient(145deg, #111B2E, #0E1626);
+  border: 1px solid #1F2A44;
+  border-radius: 20px;
+}
+
+.portfolio-cta p {
+  margin: 10px 0 20px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .portfolio-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .portfolio-hero {
+    padding: 40px 22px;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-filters {
+    justify-content: center;
+  }
+}
+
+/* =========================
+   STORE PAGE (CLEAN SYSTEM)
+========================= */
+
+.store-title {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 34px;
+}
+
+.store-subtitle {
+  text-align: center;
+  max-width: 700px;
+  margin: 10px auto 40px;
+  color: #94A3B8;
+  font-size: 15px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.store-grid {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px 60px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
+.store-card {
+  background: #111B2E;
+  border: 1px solid #1F2A44;
+  border-radius: 14px;
+
+  padding: 20px;
+  transition: 0.2s ease;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.store-card:hover {
+  transform: translateY(-4px);
+  border-color: #4F7CFF;
+}
+
+.store-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.store-card h3 {
+  font-size: 18px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+
+  background: #0E1626;
+  border: 1px solid #1F2A44;
+  color: #6AA6FF;
+}
+
+.store-desc {
+  margin: 12px 0;
+  font-size: 14px;
+  color: #94A3B8;
+}
+
+.store-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+
+  font-size: 13px;
+  color: #64748B;
+}
+
+.price {
+  color: #F8FAFC;
+  font-weight: 600;
+}
+
+.store-btn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+
+  padding: 10px;
+  border-radius: 10px;
+
+  background: #4F7CFF;
+  color: white;
+  font-weight: 500;
+
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.store-btn:hover {
+  background: #3B66E3;
+}
+
+/* =========================
+   SLIDER
+========================= */
+
+.store-slider {
+  position: relative;
+  width: 100%;
+  height: 180px;
+
+  border-radius: 12px;
+  overflow: hidden;
+
+  margin-bottom: 12px;
+
+  border: 1px solid #1F2A44;
+}
+
+.store-slider .slide {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.store-slider .slide.active {
+  opacity: 1;
+}
+
+/* =========================
+   LICENSE STRIP (FIXED SYSTEM)
+========================= */
+
+.license-strip {
+  max-width: 1100px;
+  margin: 20px auto 30px;
+  padding: 14px 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+
+  background: linear-gradient(145deg, #111B2E, #0E1626);
+  border: 1px solid #1F2A44;
+  border-radius: 12px;
+
+  z-index: 5;
+}
+
+.license-summary {
+  font-size: 13px;
+  color: #94A3B8;
+  line-height: 1.4;
+  max-width: 80%;
+}
+
+.license-btn {
+  background: transparent;
+  border: 1px solid #4F7CFF;
+  color: #F8FAFC;
+
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+
+.license-btn:hover {
+  background: #4F7CFF;
+}
+
+/* =========================
+   LICENSE OVERVIEW FIX
+   (centers + removes cluttered list feel)
+========================= */
+
+.license-box {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 40px 20px;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* 🔥 fixes left alignment */
+}
+
+.license-box p {
+  max-width: 720px;
+  margin: 10px auto 0;
+  color: #94A3B8;
+  text-align: center;     /* 🔥 ensures no left drift */
+  line-height: 1.6;
+}
+
+/* if you EVER use UL inside license-box */
+.license-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 18px auto 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  max-width: 720px;
+  text-align: center;     /* override default left alignment */
+}
+
+/* each list item becomes a "card line" instead of bullet clutter */
+.license-box ul li {
+  background: #111B2E;
+  border: 1px solid #1F2A44;
+  border-radius: 10px;
+
+  padding: 10px 12px;
+
+  font-size: 13px;
+  color: #94A3B8;
+}
+/* =========================
+   LICENSE MODAL (CLEAN + SCALABLE)
+========================= */
+
+.license-modal {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,0.7);
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 100000;
+}
+
+.license-modal.show {
+  display: flex;
+}
+
+.license-modal-box {
+  width: min(700px, 92vw);
+  max-height: 80vh;
+
+  overflow-y: auto;
+
+  background: #0B1220;
+  border: 1px solid #1F2A44;
+  border-radius: 14px;
+
+  padding: 20px;
+}
+
+.license-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 12px;
+}
+
+.license-modal-header button {
+  background: none;
+  border: none;
+  color: #F8FAFC;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.license-modal-content h3 {
+  margin-top: 16px;
+  color: #6AA6FF;
+}
+
+.license-modal-content p,
+.license-modal-content li {
+  font-size: 13px;
+  color: #94A3B8;
+  margin-bottom: 6px;
+}
+
+/* =========================
+   RESPONSIVE FIX
+========================= */
+
+@media (max-width: 900px) {
+
+  .store-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .license-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .license-summary {
+    max-width: 100%;
+  }
+
+  .license-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* =========================
+   LICENSE OVERVIEW (COMPACT + NON-INTRUSIVE)
+========================= */
+
+.license-overview {
+  max-width: 1100px;
+  margin: 40px auto 30px;
+  padding: 0 20px;
+
+  text-align: center;
+}
+
+.license-overview h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #F8FAFC;
+}
+
+/* cards */
+.license-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+
+  margin-bottom: 14px;
+}
+
+/* card compact */
+.license-card {
+  background: #111B2E;
+  border: 1px solid #1F2A44;
+  border-radius: 10px;
+
+  padding: 12px;
+  text-align: left;
+
+  transition: 0.2s ease;
+}
+
+.license-card:hover {
+  border-color: rgba(79,124,255,0.5);
+  transform: translateY(-2px);
+}
+
+.license-card h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #6AA6FF;
+}
+
+.license-card p {
+  font-size: 12.5px;
+  color: #94A3B8;
+  line-height: 1.5;
+}
+
+/* warning becomes subtle strip */
+.license-warning {
+  margin: 10px auto 0;
+  padding: 10px 12px;
+
+  max-width: 900px;
+
+  border-radius: 10px;
+  border: 1px solid #1F2A44;
+  background: rgba(79,124,255,0.06);
+
+  font-size: 12.5px;
+  color: #CBD5E1;
+  line-height: 1.5;
+}
+
+/* contact section becomes inline */
+.license-contact {
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: #94A3B8;
+}
+
+.license-contact p {
+  margin-bottom: 6px;
+}
+
+/* link becomes button-like */
+.license-contact a {
+  display: inline-block;
+  margin-top: 6px;
+
+  color: #F8FAFC;
+  text-decoration: none;
+
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  border: 1px solid #4F7CFF;
+  transition: 0.2s ease;
+}
+
+.license-contact a:hover {
+  background: #4F7CFF;
+}
+
+/* =========================
+   RESPONSIVE FIX
+========================= */
+
+@media (max-width: 900px) {
+  .license-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .license-overview {
+    margin: 30px auto 20px;
+  }
+}
