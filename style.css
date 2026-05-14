@@ -2339,3 +2339,138 @@ body.banner-active {
     margin: 30px auto 20px;
   }
 }
+
+/* =========================================================
+   FINAL MOBILE FIX (STORE + PORTFOLIO)
+   DROP AT BOTTOM OF CSS
+========================================================= */
+
+@media (max-width: 900px) {
+
+  /* =========================
+     STORE PAGE FIXES
+  ========================= */
+
+  .store-title {
+    font-size: 26px;
+    margin-top: 40px;
+    padding: 0 15px;
+  }
+
+  .store-subtitle {
+    font-size: 14px;
+    padding: 0 15px;
+    margin-bottom: 25px;
+  }
+
+  /* force single column store grid */
+  .store-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 15px 50px;
+  }
+
+  /* store cards breathing room */
+  .store-card {
+    padding: 16px;
+  }
+
+  .store-slider {
+    height: 200px;
+  }
+
+  /* license strip stacks cleanly */
+  .license-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 10px;
+  }
+
+  .license-summary {
+    max-width: 100%;
+    font-size: 12.5px;
+  }
+
+  .license-btn {
+    width: 100%;
+  }
+
+  /* license grid becomes vertical */
+  .license-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .license-card {
+    text-align: left;
+  }
+
+  /* center CTA spacing */
+  .license-box {
+    margin: 40px auto;
+    padding: 30px 15px;
+  }
+
+  /* =========================
+     PORTFOLIO PAGE FIXES
+  ========================= */
+
+  .portfolio-hero {
+    padding: 35px 18px;
+  }
+
+  .portfolio-hero h1 {
+    font-size: 24px;
+  }
+
+  .portfolio-hero p {
+    font-size: 14px;
+  }
+
+  /* stats collapse cleanly */
+  .portfolio-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat-box {
+    padding: 18px;
+  }
+
+  .stat-box h3 {
+    font-size: 22px;
+  }
+
+  /* filters become scrollable row */
+  .portfolio-filters {
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 8px;
+  }
+
+  .portfolio-filters button {
+    flex: 0 0 auto;
+    font-size: 13px;
+  }
+
+  /* portfolio grid single column */
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .project-info h3 {
+    font-size: 16px;
+  }
+
+  .project-info p {
+    font-size: 13px;
+  }
+
+  /* CTA tighter spacing */
+  .portfolio-cta {
+    padding: 35px 18px;
+  }
+
+}
